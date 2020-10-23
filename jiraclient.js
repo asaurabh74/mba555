@@ -10,7 +10,7 @@ function Jiralib(config) {
 
         basic_auth: {
             username: "asaurabh@yahoo.com",
-            password: "hb7Zq3eXgTlScf1dChAm7A0D"
+            password: ""
         }
     });
 
