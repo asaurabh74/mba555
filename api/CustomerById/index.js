@@ -1,4 +1,4 @@
-const customers = require('../data/customers.json');
+var customers = require('../data/customers.json');
 
 module.exports = async function (context, req) {
     const { id } = context.bindingData;

@@ -1,8 +1,10 @@
 "use strict";
 var express     = require('express'),
+    session     = require ('express-session'),
     bodyParser  = require('body-parser'),
     fs          = require('fs'), 
     app         = express(), 
+    Jiralib  = require('./jiraclient'),
     customers   = JSON.parse(fs.readFileSync('data/customers.json', 'utf-8')),
     states      = JSON.parse(fs.readFileSync('data/states.json', 'utf-8')),
     inContainer = process.env.CONTAINER,
@@ -11,6 +13,7 @@ var express     = require('express'),
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(session({secret: 'mba555'}));
 
 //CORS
 app.use(function(req, res, next) {
@@ -27,6 +30,19 @@ if (!inContainer) {
 }
 
 app.get('/api/customers/page/:skip/:top', (req, res) => {
+    const sess = req.session;
+    const username = sess.username;
+    const password = sess.password;
+
+    if (!username || !password) {
+        res.send(401);
+        return;
+    }
+
+    var jiraClient = new Jiralib();
+    var candidates = jiraClient.getCandidates();
+    console.log (candidates);
+
     const topVal = req.params.top,
           skipVal = req.params.skip,
           skip = (isNaN(skipVal)) ? 0 : +skipVal;  
@@ -120,6 +136,9 @@ app.get('/api/states', (req, res) => {
 app.post('/api/auth/login', (req, res) => {
     var userLogin = req.body;
     //Add "real" auth here. Simulating it by returning a simple boolean.
+    let sess = req.session;
+    sess.username = userLogin.email;
+    sess.password = userLogin.password;
     res.json(true);
 });
 
