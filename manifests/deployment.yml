@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: mba555 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mba555
+  template:
+    metadata:
+      labels:
+        app: mba555 
+    spec:
+      containers:
+        - name: mba555 
+          image: mba555.azurecr.io/mba555
+          ports:
+          - containerPort: 80
