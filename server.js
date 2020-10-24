@@ -9,6 +9,7 @@ var express     = require('express'),
     states      = JSON.parse(fs.readFileSync('data/states.json', 'utf-8')),
     inContainer = process.env.CONTAINER,
     inAzure = process.env.WEBSITE_RESOURCE_GROUP,
+    useNginx = process.env.USE_NGINX,
     port = process.env.PORT || 8080;
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -146,7 +147,7 @@ app.post('/api/auth/logout', (req, res) => {
     res.json(true);
 });
 
-if (!inContainer) {
+if (!inContainer && !useNginx) {
     // redirect all others to the index (HTML5 history)
     app.all('/*', function(req, res) {
         res.sendFile(__dirname + '/dist/index.html');

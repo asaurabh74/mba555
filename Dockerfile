@@ -2,12 +2,13 @@ FROM node:12.16.1-alpine
 
 LABEL author="Saurabh Agarwal"
 
-# ENV CONTAINER=true
+ENV CONTAINER=true
+ENV USE_NGINX=false
 
 WORKDIR /var/www/node-service
 
 COPY package.json package-lock.json ./
-RUN npm install
+RUN npm install --only=prod
 
 COPY ./server.js .
 COPY ./api .
