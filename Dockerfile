@@ -1,3 +1,21 @@
-FROM nginx:1.17.1-alpine
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY /dist /usr/share/nginx/html
+FROM node:12.16.1-alpine
+
+LABEL author="Saurabh Agarwal"
+
+# ENV CONTAINER=true
+
+WORKDIR /var/www/node-service
+
+COPY package.json package-lock.json ./
+RUN npm install --only=prod && \
+    npm run build
+
+COPY ./server.js .
+COPY ./api .
+COPY ./data .
+COPY ./jiraclient.js
+
+EXPOSE 8080
+EXPOSE 8443
+
+ENTRYPOINT ["node", "server.js"]
