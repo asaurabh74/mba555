@@ -7,18 +7,20 @@ ENV USE_NGINX=false
 
 WORKDIR /var/www/node-service
 
-COPY package.json package-lock.json ./
-COPY ./server.js .
-COPY ./api .
-COPY ./data .
-COPY ./jiraclient.js .
-COPY ./src .
+# COPY package.json package-lock.json ./
+# COPY ./server.js .
+# COPY ./api .
+# COPY ./data .
+# COPY ./jiraclient.js .
+# COPY ./src .
 
-RUN npm install --only=prod && \
-    npm install -g @angular/cli@7.3.9 && \
-    npm build
+# RUN cat package.json
 
-RUN ls -al dist
+COPY . .
+
+RUN npm install -g @angular/cli@7.3.9
+RUN npm install
+RUN ng build --outputPath=dist
 
 EXPOSE 8080
 EXPOSE 8443
