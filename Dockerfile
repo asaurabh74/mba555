@@ -7,8 +7,12 @@ ENV USE_NGINX=false
 
 WORKDIR /var/www/node-service
 
+
 COPY package.json package-lock.json ./
-RUN npm install --only=prod
+
+RUN npm install --only=prod && \
+    npm install -g @angular/cli@7.3.9 && \
+    npm build
 
 RUN ls -al
 
