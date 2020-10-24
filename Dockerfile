@@ -4,9 +4,6 @@ LABEL author="Saurabh Agarwal"
 
 # ENV CONTAINER=true
 
-ENV usename
-ENV password
-
 WORKDIR /var/www/node-service
 
 COPY package.json package-lock.json ./
