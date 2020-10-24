@@ -14,7 +14,7 @@ COPY ./server.js .
 COPY ./api .
 COPY ./data .
 COPY ./jiraclient.js .
-COPY /dist .
+COPY ./dist .
 
 EXPOSE 8080
 EXPOSE 8443

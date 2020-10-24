@@ -147,12 +147,12 @@ app.post('/api/auth/logout', (req, res) => {
     res.json(true);
 });
 
-if (!inContainer && !useNginx) {
+//if (!inContainer && !useNginx) {
     // redirect all others to the index (HTML5 history)
     app.all('/*', function(req, res) {
         res.sendFile(__dirname + '/dist/index.html');
     });
-}
+//}
 
 app.listen(port);
 
