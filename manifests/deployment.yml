@@ -16,4 +16,4 @@ spec:
         - name: mba555 
           image: mba555.azurecr.io/mba555
           ports:
-          - containerPort: 80
+          - containerPort: 8080
