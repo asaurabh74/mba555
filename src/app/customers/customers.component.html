@@ -29,6 +29,18 @@
                             </a>
                         </li>
                         <li class="toolbar-item">
+                            <div class="toolbar-search-item">
+                                <ng-select [items]="players"
+                                    bindLabel="playerName"
+                                    placeholder="Select Player"
+                                    appendTo="body"
+                                    multiple="true"
+                                    [(ngModel)]="selected">
+                                </ng-select>
+                            </div>
+                        </li>
+
+                        <li class="toolbar-item">
                             <a routerLink="/customers/0/edit">
                                 <span class="glyphicon glyphicon-plus"></span> New Candidate
                             </a>

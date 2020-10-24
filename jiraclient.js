@@ -9,8 +9,8 @@ function Jiralib(config) {
         strictSSL: true, // One of optional parameters
 
         basic_auth: {
-            username: "asaurabh@yahoo.com",
-            password: ""
+            username: process.env.username,
+            password: process.env.password
         }
     });
 
