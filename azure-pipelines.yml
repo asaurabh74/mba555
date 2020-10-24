@@ -24,6 +24,20 @@ variables:
   # Name of the new namespace being created to deploy the PR changes.
   k8sNamespaceForPR: 'review-app-$(System.PullRequest.PullRequestId)'
 
+#   trigger:
+# - master
+
+# pool:
+#   vmImage: 'ubuntu-latest'
+
+# steps:
+# - task: NodeTool@0
+#   inputs:
+#     versionSpec: '10.x'
+#   displayName: 'Install Node.js'
+
+
+
 stages:
 - stage: Build
   displayName: Build stage
@@ -33,6 +47,12 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
+
+    - script: |
+        npm install
+        npm run build
+      displayName: 'npm install and build'
+
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
