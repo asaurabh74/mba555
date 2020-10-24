@@ -19,7 +19,7 @@ RUN npm install --only=prod && \
     npm install -g @angular/cli@7.3.9 && \
     npm build
 
-RUN ls -al
+RUN ls -al dist
 
 EXPOSE 8080
 EXPOSE 8443
