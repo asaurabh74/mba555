@@ -13,7 +13,7 @@ RUN npm install --only=prod && \
 COPY ./server.js .
 COPY ./api .
 COPY ./data .
-COPY ./jiraclient.js
+COPY ./jiraclient.js .
 
 EXPOSE 8080
 EXPOSE 8443
