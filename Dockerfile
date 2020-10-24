@@ -7,7 +7,7 @@ LABEL author="Saurabh Agarwal"
 WORKDIR /var/www/node-service
 
 COPY package.json package-lock.json ./
-RUN npm install --only=prod
+RUN npm install
 
 COPY ./server.js .
 COPY ./api .
