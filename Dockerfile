@@ -12,7 +12,6 @@ COPY ./server.js .
 COPY ./api .
 COPY ./data .
 COPY ./jiraclient.js .
-COPY ./dist .
 COPY ./src .
 
 RUN npm install --only=prod && \
