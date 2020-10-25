@@ -35,14 +35,14 @@ app.get('/api/customers/page/:skip/:top', (req, res) => {
     const username = sess.username;
     const password = sess.password;
 
-    if (!username || !password) {
-        res.send(401);
-        return;
-    }
+    // if (!username || !password) {
+    //     res.send(401);
+    //     return;
+    // }
 
-    var jiraClient = new Jiralib();
-    var candidates = jiraClient.getCandidates();
-    console.log (candidates);
+    // var jiraClient = new Jiralib();
+    // var candidates = jiraClient.getCandidates();
+    // console.log (candidates);
 
     const topVal = req.params.top,
           skipVal = req.params.skip,
@@ -149,8 +149,15 @@ app.post('/api/auth/logout', (req, res) => {
 
 //if (!inContainer && !useNginx) {
     // redirect all others to the index (HTML5 history)
+
     app.all('/*', function(req, res) {
-        res.sendFile(__dirname + '/dist/index.html');
+       // res.sendFile(__dirname + `/dist${req.url}`);
+       var pattern = new RegExp('(.css|.html|.js|.ico|.jpg|.jpeg|.png)+$', 'gi');
+        if (pattern.test(req.url)) {
+          res.sendFile(path.resolve(__dirname, `/dist${req.url}`));
+        } else {
+          res.sendFile(path.resolve(__dirname, '/dist/index.html'));
+        }
     });
 //}
 

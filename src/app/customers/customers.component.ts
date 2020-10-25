@@ -22,16 +22,16 @@ export class CustomersComponent implements OnInit {
   pageSize = 10;
   
   players = [
-    {id: 1, playerName: 'Cristiano Ronaldo'},
-    {id: 2, playerName: 'Lionel Messi'},
-    {id: 3, playerName: 'Neymar Jr'},
-    {id: 4, playerName: 'Toni Kroos'},
-    {id: 5, playerName: 'Luiz Suarez', disabled: true},
-    {id: 6, playerName: 'Karim Benzema'},
-    {id: 7, playerName: 'Eden Hazard'},
+    {id: 1, playerName: 'Connecticut'},
+    {id: 2, playerName: 'New York'},
+    {id: 3, playerName: 'California'},
+    {id: 4, playerName: 'Arizona'},
+    {id: 5, playerName: 'Florida', disabled: true},
+    {id: 6, playerName: 'Georgia'},
+    {id: 7, playerName: 'Texas'},
   ];
   selected = [
-    {id: 2, playerName: 'Toni Kroos'}
+    {id: 2, playerName: 'Georgia'}
   ];
 
   mapComponentRef: ComponentRef<any>;
