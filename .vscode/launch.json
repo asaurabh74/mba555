@@ -13,15 +13,7 @@
                 "<node_internals>/**"
             ],
             "env": {
-                "admin_username": "sagarwa9@ncsu.edu",
-                "admin_password": "SbDTVXklMb10EUx04at35687",
-                "jira_host_base_url": "https://arsof.atlassian.net",
-                "jira_host": "arsof.atlassian.net",
-                "consumer_key": "myArsofSoftware",
-                "consumer_secret": "mbaARSOF!!12",
-                "consumer_private_key_file": "/Users/saesha/dev/oauth/jira_privatekey.pem",
-                "session_secret" : "mBa555ArS0F#6",
-                "application_url" : "http://localhost:8080"
+            
             },
             "program": "${workspaceFolder}/server.js"
         }
