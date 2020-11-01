@@ -21,7 +21,7 @@ COPY . .
 RUN npm install -g @angular/cli@7.3.9
 RUN npm install
 RUN ng build --outputPath=dist
-RUN ls -al
+RUN npm install ./oauth
 
 EXPOSE 8080
 EXPOSE 8443
