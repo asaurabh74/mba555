@@ -21,8 +21,20 @@ export class AuthService {
        this.authChanged.emit(status); // Raise changed event
     }
 
-    login(userLogin: IUserLogin): Observable<boolean> {
-        return this.http.post<boolean>(this.authUrl + '/login', userLogin)
+    // login(userLogin: IUserLogin): Observable<boolean> {
+    //     return this.http.post<boolean>(this.authUrl + '/login', userLogin)
+    //         .pipe(
+    //             map(loggedIn => {
+    //                 this.isAuthenticated = loggedIn;
+    //                 this.userAuthChanged(loggedIn);
+    //                 return loggedIn;
+    //             }),
+    //             catchError(this.handleError)
+    //         );
+    // }
+
+    isLoggedIn(): Observable<boolean> {
+        return this.http.get<boolean>(this.authUrl + '/isLoggedIn')
             .pipe(
                 map(loggedIn => {
                     this.isAuthenticated = loggedIn;
@@ -44,6 +56,11 @@ export class AuthService {
                 catchError(this.handleError)
             );
     }
+
+    // logout() {
+    //     Cookie.delete('access_token');
+    //     window.location.reload();
+    //   }
 
     private handleError(error: HttpErrorResponse) {
         console.error('server error:', error);

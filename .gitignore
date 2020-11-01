@@ -18,6 +18,8 @@ src/app/dist
 
 cypress/videos/
 cypress/screenshots/
+config.js
+server.js.bak
 
 
 

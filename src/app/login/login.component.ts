@@ -35,24 +35,28 @@ export class LoginComponent implements OnInit {
     }
 
     submit({ value, valid }: { value: IUserLogin, valid: boolean }) {
-        this.authService.login(value)
-            .subscribe((status: boolean) => {
-                if (status) {
-                    this.growler.growl('Logged in', GrowlerMessageType.Info);
-                    if (this.authService.redirectUrl) {
-                        const redirectUrl = this.authService.redirectUrl;
-                        this.authService.redirectUrl = '';
-                        this.router.navigate([redirectUrl]);
-                    } else {
-                        this.router.navigate(['/customers']);
-                    }
-                } else {
-                    const loginError = 'Unable to login';
-                    this.errorMessage = loginError;
-                    this.growler.growl(loginError, GrowlerMessageType.Danger);
-                }
-            },
-            (err: any) => this.logger.log(err));
+        window.location.href = '/api/auth/login';
+        // this.authService.login(value)
+        //     .subscribe((status: boolean) => {
+        //         if (status) {
+        //             this.growler.growl('Logged in', GrowlerMessageType.Info);
+        //             if (this.authService.redirectUrl) {
+        //                 const redirectUrl = this.authService.redirectUrl;
+        //                 this.authService.redirectUrl = '';
+        //                 this.router.navigate([redirectUrl]);
+        //             } else {
+        //                 this.router.navigate(['/customers']);
+        //             }
+        //         } else {
+        //             // const loginError = 'Unable to login';
+        //             // this.errorMessage = loginError;
+        //             // this.growler.growl(loginError, GrowlerMessageType.Danger);
+
+        //             // redirect to the altassian login form
+        //             window.location.href = '/sessions/connect';
+        //         }
+        //     },
+        //     (err: any) => this.logger.log(err));
     }
 
 }

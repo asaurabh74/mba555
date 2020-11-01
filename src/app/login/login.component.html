@@ -7,7 +7,11 @@
         <form [formGroup]="loginForm" (ngSubmit)="submit(loginForm)" class="login-form" novalidate>
             <div class="login">
                 <div class="row">
-                    <div class="col-md-2">
+                    <h3>Welcome to ARSOF login page.</h3>
+                    <br>
+                    <p>ARSOF demo application will use JIRA SSO to login. </p>
+                    <p>Contact ARSOF <a href = "mailto: sagarwa9@ncsu.edu">admin</a> to set up an account before you can login.</p>
+                    <!-- <div class="col-md-2">
                         Email:
                     </div>
                     <div class="col-md-10">
@@ -15,9 +19,9 @@
                         <div class="alert alert-danger" data-cy="email-error" [hidden]="loginForm.controls.email.untouched || loginForm.controls.email.valid">
                             A valid email address is required
                         </div>
-                    </div>
+                    </div> -->
                 </div>
-                <br />
+                <!-- <br />
                 <div class="row">
                     <div class="col-md-2">
                         Password:
@@ -29,19 +33,19 @@
                         </div>
                     </div>
                 </div>
-                <br />
+                <br /> -->
                 <div class="row">
                     <div class="col-md-12">
-                        <button type="submit" class="btn btn-success" [disabled]="!loginForm.valid">Login</button>
+                        <button type="submit" class="btn btn-success">Login</button>
                     </div>
                 </div>
                 <br />
-                <div class="statusRow">
+                <!-- <div class="statusRow">
                     <br />
                     <div class="label label-important" *ngIf="errorMessage">
                         <span class="glyphicon glyphicon-thumbs-down icon-white"></span>&nbsp;&nbsp;Error: {{ errorMessage }}
                     </div>
-                </div>
+                </div> -->
             </div>
         </form>
         

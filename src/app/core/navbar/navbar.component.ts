@@ -23,6 +23,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
         private logger: LoggerService) { }
 
     ngOnInit() {
+        this.setLoginStatus();
         this.sub = this.authservice.authChanged
             .subscribe((loggedIn: boolean) => {
                 this.setLoginLogoutText();
@@ -32,6 +33,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.sub.unsubscribe();
+    }
+
+    setLoginStatus() {
+        this.authservice.isLoggedIn()
+            .subscribe((status: boolean) => {
+                this.setLoginLogoutText();
+            },
+            (err: any) => this.logger.log(err));
     }
 
     loginOrOut() {

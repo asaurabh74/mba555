@@ -15,5 +15,16 @@ spec:
       containers:
         - name: mba555 
           image: mba555.azurecr.io/mba555
+          - envFrom:
+            - secretRef:
+                name: jira-config
           ports:
           - containerPort: 8080
+          volumeMounts:
+          - mountPath: /etc/jira-ssh-keys
+            name: secret-volume
+
+      volumes:
+        - name: secret-volume
+          secret:
+            secretName: jira-key-secret
