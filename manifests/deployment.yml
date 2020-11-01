@@ -20,11 +20,11 @@ spec:
               name: jira-config
           ports:
           - containerPort: 8080
-          volumeMounts:
-          - mountPath: /etc/jira-ssh-keys
-            name: secret-volume
+          # volumeMounts:
+          # - mountPath: /etc/jira-ssh-keys
+          #   name: secret-volume
 
-      volumes:
-        - name: secret-volume
-          secret:
-            secretName: jira-key-secret
+      # volumes:
+      #   - name: secret-volume
+      #     secret:
+      #       secretName: jira-key-secret
