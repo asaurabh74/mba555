@@ -20,7 +20,7 @@ cypress/videos/
 cypress/screenshots/
 config.js
 server.js.bak
-.vscode/**
+**/launch.json
 
 
 

@@ -7,6 +7,7 @@ var express     = require('express'),
     OAuth = require('oauth').OAuth,
     app         = express(), 
     Jiralib     = require('./jiraclient'),
+    JiraAdminlib = require('./jiraAdminClient'),
     customers   = JSON.parse(fs.readFileSync('data/customers.json', 'utf-8')),
     states      = JSON.parse(fs.readFileSync('data/states.json', 'utf-8')),
     inContainer = process.env.CONTAINER,
@@ -24,6 +25,7 @@ app.use(session({
 }));
 
 var privateKeyData = fs.readFileSync(process.env.consumer_private_key_file, "utf8");
+var jiraAdminClient = new JiraAdminlib();
 var consumer = 
   new OAuth(`${process.env.jira_host_base_url}/plugins/servlet/oauth/request-token`,
                   `${process.env.jira_host_base_url}/plugins/servlet/oauth/access-token`,
@@ -49,7 +51,6 @@ if (!inContainer) {
     console.log(__dirname);
 }
 
-
 function auth(req, res, next) {
     var loggedIn;
     if (req.session
@@ -63,18 +64,23 @@ function auth(req, res, next) {
     next();
 }
 
-app.get('/api/customers/page/:skip/:top', auth, (req, res) => {
+function getJiraClient(req) {
+    var opts = {
+        consumer_key: process.env.consumer_key,
+        private_key: privateKeyData,
+        token: req.session.oauthAccessToken,
+        token_secret: req.session.oauthAccessTokenSecret
+       };
+    return new Jiralib(opts, jiraAdminClient);
+}
 
-   var opts = {
-    consumer_key: process.env.consumer_key,
-    private_key: privateKeyData,
-    token: req.session.oauthAccessToken,
-    token_secret: req.session.oauthAccessTokenSecret
-   }
-    var jiraClient = new Jiralib(opts);
-    var jql;
-    var startAt
-    var maxResults
+app.get('/api/customers/page/:skip/:top', auth, (req, res) => {
+   
+    var jql, 
+        startAt,
+        maxResults;
+
+    var jiraClient = getJiraClient(req);
 
     const topVal = req.params.top,
     skipVal = req.params.skip,
