@@ -6,6 +6,7 @@ sandboxes.ts
 # Code Editor Settings
 .idea
 .vs
+.backup
 
 # Build Generated Files
 src/app/**/*.js
@@ -20,7 +21,8 @@ cypress/videos/
 cypress/screenshots/
 config.js
 server.js.bak
-**/launch.json
 
 
 
+
+.bakcup/launch.json
