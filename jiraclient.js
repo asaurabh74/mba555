@@ -44,9 +44,11 @@ function Jiralib(opts, adminClient) {
             "assignee",
             "reporter",
         ];
+
+        var customFieldNames = this.adminClient.getCustomFieldNames();
         
-        for (var x in this.customFieldNames) {
-            await this.addField(customFields, this.customFieldNames[x]);
+        for (var x in customFieldNames) {
+            await this.addField(customFields, customFieldNames[x]);
         }
         
         jql = jql || "";
@@ -72,22 +74,42 @@ function Jiralib(opts, adminClient) {
                 assigneeName: fields.assignee ? fields.assignee.displayName : "",
                 assigneeEmail: fields.assignee ? fields.assignee.emailAddress : ""
             };
-            for (var id in this.customFieldNames) {
-                 var customField =  await this.adminClient.getCustomField(this.customFieldNames[id]);
+            for (var id in customFieldNames) {
+                 var customField =  await this.adminClient.getCustomField(customFieldNames[id]);
                  if (customField) {
                     candidate[id] = fields[customField.id];
                  }
             }
-            var state = {
-                "abbreviation": candidate.state,
-                "name": candidate.state,
-            }
-            candidate.state = state;
+            // var state = {
+            //     "abbreviation": candidate.state,
+            //     "name": candidate.state,
+            // }
+            // candidate.state = state;
             candidate.gender = candidate.gender || "male";
             candidates.push(candidate);
            }
         
        }
        return candidates;
-    }      
+    }
+    
+    this.selectedFieldNames = ["firstName", "lastName", "address", "GT_ASVAB_SCORE", "city", "state", "zip"];
+
+    this.getSelectedFieldNames = () => {
+        var customFieldNames = this.adminClient.getCustomFieldNames();
+        var  fields = [];
+        for (var id in customFieldNames) {
+            if (this.selectedFieldNames.indexOf(id) !== -1) {
+                fields.push({
+                    name: id,
+                    displayName: customFieldNames[id]
+                });
+            }
+        }
+        return fields;
+    }
+
+    this.setSelectedFieldNames = (fieldNames) => {
+        this.selectedFieldNames = fieldNames;
+    }
   }

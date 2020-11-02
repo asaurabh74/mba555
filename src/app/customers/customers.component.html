@@ -58,6 +58,7 @@
     
         <cm-customers-grid 
           [customers]="filteredCustomers" 
+          [fields]="selectedFields"
           [hidden]="displayMode !== displayModeEnum.Grid"></cm-customers-grid>
 
         <!-- lazy load the map component -->
@@ -78,7 +79,7 @@
             *ngFor="let customer of filteredCustomers" 
             [latitude]="customer.latitude" 
             [longitude]="customer.longitude"
-            [markerText]="'<h3>' + customer.firstName + ' ' + customer.lastName + '</h3>' + customer.city + ', ' + customer.state.name"></cm-map-point>
+            [markerText]="'<h3>' + customer.firstName + ' ' + customer.lastName + '</h3>' + customer.city + ', ' + customer.state"></cm-map-point>
         </cm-map> -->
 
         <cm-pagination

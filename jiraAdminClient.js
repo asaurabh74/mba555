@@ -31,5 +31,30 @@ function JiraAdminlib() {
             }
         }
     }
-      
+
+    this.customFieldNames = {firstName:"First Name", 
+                             lastName:"Last Name", 
+                             address: "Address",
+                             GT_ASVAB_SCORE: "GT_ASVAB_SCORE", 
+                             city: "City",
+                             state: "State",
+                             zip: "Zip",
+                             GM_ASVAB_SCORE: "GM_ASVAB_SCORE", 
+                             ST_ASVAB_SCORE: "ST_ASVAB_SCORE", 
+                             gender: "gender"};
+
+     this.getCustomFieldNames = () => {
+         return this.customFieldNames;
+     }
+
+     this.getCustomFieldNamesJSON = () => {
+        var fieldNames = [];
+        for (var id in this.customFieldNames) {
+            fieldNames.push ({
+                name: id,
+                displayName: customFieldNames[id]
+            });
+       }
+       return fieldNames;
+    }
   }

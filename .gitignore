@@ -22,7 +22,5 @@ cypress/screenshots/
 config.js
 server.js.bak
 
-
-
-
 .bakcup/launch.json
+.vscode/launch.json

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild,
   ViewContainerRef, ComponentFactoryResolver, ComponentRef } from '@angular/core';
 
 import { DataService } from '../core/services/data.service';
-import { ICustomer, IPagedResults } from '../shared/interfaces';
+import { ICustomer, IPagedResults ,ICandidateField} from '../shared/interfaces';
 import { FilterService } from '../core/services/filter.service';
 import { LoggerService } from '../core/services/logger.service';
 
@@ -20,6 +20,7 @@ export class CustomersComponent implements OnInit {
   displayModeEnum = DisplayModeEnum;
   totalRecords = 0;
   pageSize = 10;
+  selectedFields: ICandidateField[] =[];
   
   players = [
     {id: 1, playerName: 'Connecticut'},
@@ -60,6 +61,7 @@ export class CustomersComponent implements OnInit {
     this.displayMode = DisplayModeEnum.Card;
 
     this.getCustomersPage(1);
+    this.getSelectedFields();
   }
 
   changeDisplayMode(mode: DisplayModeEnum) {
@@ -78,6 +80,15 @@ export class CustomersComponent implements OnInit {
         },
         (err: any) => this.logger.log(err),
         () => this.logger.log('getCustomersPage() retrieved customers for page: ' + page));
+  }
+
+  getSelectedFields() {
+    this.dataService.getSelectedCandidateFields()
+        .subscribe((response: ICandidateField []) => {
+          this.selectedFields  = response;
+        },
+        (err: any) => this.logger.log(err),
+        () => this.logger.log('getSelectedCandidateFields() retrieved for'));
   }
 
   filterChanged(data: string) {

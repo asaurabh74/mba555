@@ -13,6 +13,12 @@ export interface ICustomer {
     orderTotal?: number;
     latitude?: number;
     longitude?: number;
+    checked?: boolean;
+}
+
+export interface ICandidateField {
+    name: string;
+    displayName?: string;
 }
 
 export interface IMapDataPoint {

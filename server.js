@@ -74,6 +74,15 @@ function getJiraClient(req) {
     return new Jiralib(opts, jiraAdminClient);
 }
 
+app.get('/api/admin/fields', auth, (req, res) => {
+    res.json(jiraAdminClient.getCustomFieldNamesJSON());
+});
+
+app.get('/api/candidate/fields', auth, (req, res) => {
+    var jiraClient = getJiraClient(req);
+    res.json(jiraClient.getSelectedFieldNames());
+});
+
 app.get('/api/customers/page/:skip/:top', auth, (req, res) => {
    
     var jql, 

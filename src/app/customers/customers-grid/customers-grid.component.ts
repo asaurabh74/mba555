@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core
 
 import { SorterService } from '../../core/services/sorter.service';
 import { TrackByService } from '../../core/services/trackby.service';
-import { ICustomer } from '../../shared/interfaces';
+import { ICustomer, ICandidateField } from '../../shared/interfaces';
 
 @Component({
   selector: 'cm-customers-grid',
@@ -16,6 +16,7 @@ import { ICustomer } from '../../shared/interfaces';
 export class CustomersGridComponent implements OnInit {
 
   @Input() customers: ICustomer[] = [];
+  @Input() fields: ICandidateField[] = [];
 
   constructor(private sorterService: SorterService, public trackbyService: TrackByService) { }
 
@@ -26,5 +27,18 @@ export class CustomersGridComponent implements OnInit {
   sort(prop: string) {
     this.customers = this.sorterService.sort(this.customers, prop);
   }
+
+  // getCustomers(): void {
+	// 	this.dataService.getCustomers().subscribe(customers => this.customers = customers);
+	// }
+	
+	checkAllCheckBox(ev) {
+		this.customers.forEach(x => x.checked = ev.target.checked)
+	}
+
+	isAllCheckBoxChecked() {
+		return this.customers.every(p => p.checked);
+	}
+
 
 }

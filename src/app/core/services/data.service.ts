@@ -4,7 +4,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
-import { ICustomer, IOrder, IState, IPagedResults, IApiResponse } from '../../shared/interfaces';
+import { ICustomer, IOrder, IState, IPagedResults, IApiResponse, ICandidateField } from '../../shared/interfaces';
 import { UtilitiesService } from './utilities.service';
 
 @Injectable()
@@ -83,6 +83,16 @@ export class DataService {
             .pipe(catchError(this.handleError));
     }
 
+    getCandidateFields(): Observable<ICandidateField[]> {
+        return this.http.get<ICandidateField[]>(this.baseUrl + '/api/admin/fields')
+            .pipe(catchError(this.handleError));
+    }
+
+    getSelectedCandidateFields(): Observable<ICandidateField []> {
+        return this.http.get<ICandidateField []>(this.baseUrl + '/api/candidate/fields')
+            .pipe(catchError(this.handleError));
+    }
+
     private handleError(error: HttpErrorResponse) {
         console.error('server error:', error);
         if (error.error instanceof Error) {
@@ -105,6 +115,9 @@ export class DataService {
             }
         }
     }
+
+    
+
 
     // Not using now but leaving since they show how to create
     // and work with custom observables

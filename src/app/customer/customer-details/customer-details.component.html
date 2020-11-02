@@ -10,7 +10,7 @@
       <br />
       {{ customer.address }}
       <br />
-      {{ customer.city }}, {{ customer.state.name }}
+      {{ customer.city }}, {{ customer.state }}
     </div>
   </div>    
   <br /><br />
@@ -20,7 +20,7 @@
            [longitude]="customer.longitude" 
            [zoom]="10" 
            [enabled]="mapEnabled"
-           [markerText]="'<h3>' + customer.firstName + ' ' + customer.lastName + '</h3>' + customer.city + ', ' + customer.state.name"></cm-map> -->
+           [markerText]="'<h3>' + customer.firstName + ' ' + customer.lastName + '</h3>' + customer.city + ', ' + customer.state"></cm-map> -->
           
       <!-- lazy load the map component -->
       <div>
