@@ -17,6 +17,8 @@ export class CustomersGridComponent implements OnInit {
 
   @Input() customers: ICustomer[] = [];
   @Input() fields: ICandidateField[] = [];
+  @Input() allFields: ICandidateField[] = [];
+  
 
   constructor(private sorterService: SorterService, public trackbyService: TrackByService) { }
 

@@ -21,6 +21,7 @@ export class CustomersComponent implements OnInit {
   totalRecords = 0;
   pageSize = 10;
   selectedFields: ICandidateField[] =[];
+  allFields: ICandidateField[] =[];
   
   players = [
     {id: 1, playerName: 'Connecticut'},
@@ -62,6 +63,7 @@ export class CustomersComponent implements OnInit {
 
     this.getCustomersPage(1);
     this.getSelectedFields();
+    this.getCandidateFields();
   }
 
   changeDisplayMode(mode: DisplayModeEnum) {
@@ -88,7 +90,16 @@ export class CustomersComponent implements OnInit {
           this.selectedFields  = response;
         },
         (err: any) => this.logger.log(err),
-        () => this.logger.log('getSelectedCandidateFields() retrieved for'));
+        () => this.logger.log('getSelectedCandidateFields() retrieved for customer'));
+  }
+
+  getCandidateFields() {
+    this.dataService.getCandidateFields()
+        .subscribe((response: ICandidateField []) => {
+          this.allFields  = response;
+        },
+        (err: any) => this.logger.log(err),
+        () => this.logger.log('getCandidateFields() retrieved '));
   }
 
   filterChanged(data: string) {
@@ -120,8 +131,6 @@ export class CustomersComponent implements OnInit {
       this.mapComponentRef.instance.dataPoints = this.filteredCustomers;
     }
   }
-
-
 }
 
 enum DisplayModeEnum {

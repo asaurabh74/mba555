@@ -56,9 +56,22 @@ th {
     font-weight:bold;
 }
 
-.toolbar-search-item {
+
+
+.toolbar-search-item .ng-select .ng-select-container {
+    border: none;
+    width: 150px;
+}
+
+.column-select-list .ng-select .ng-select-container {
+    border: none;
     width: 200px;
 }
+
+.column-select-list .ng-dropdown-panel {
+    width: 200px;
+}
+
 
 .navbar .nav > .toolbar-item > a.active {
     color: #000;

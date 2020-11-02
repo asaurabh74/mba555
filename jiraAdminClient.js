@@ -52,7 +52,7 @@ function JiraAdminlib() {
         for (var id in this.customFieldNames) {
             fieldNames.push ({
                 name: id,
-                displayName: customFieldNames[id]
+                displayName: this.customFieldNames[id]
             });
        }
        return fieldNames;

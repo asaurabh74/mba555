@@ -30,12 +30,19 @@
                         </li>
                         <li class="toolbar-item">
                             <div class="toolbar-search-item">
-                                <ng-select [items]="players"
+                                <ng-select #select [items]="players"
                                     bindLabel="playerName"
                                     placeholder="Select State"
                                     appendTo="body"
                                     multiple="true"
+                                    [closeOnSelect]="false"
                                     [(ngModel)]="selected">
+                                    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                        <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/> {{item.playerName}}
+                                    </ng-template>
+                                    <ng-template ng-header-tmp>
+                                        <input style="width: 100%; line-height: 24px" type="text" (input)="select.filter($event.target.value)"/>
+                                    </ng-template>
                                 </ng-select>
                             </div>
                         </li>
@@ -59,6 +66,7 @@
         <cm-customers-grid 
           [customers]="filteredCustomers" 
           [fields]="selectedFields"
+          [allFields]="allFields"
           [hidden]="displayMode !== displayModeEnum.Grid"></cm-customers-grid>
 
         <!-- lazy load the map component -->

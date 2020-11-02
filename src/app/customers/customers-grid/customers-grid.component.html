@@ -1,6 +1,24 @@
 <div class="container">
     <div class="row grid-container">
         <div class="col-md-10">
+            <div>
+                <div class="column-select-list">
+                    <ng-select #column [items]="allFields"
+                        bindLabel="displayName"
+                        placeholder="Column"
+                        multiple="true"
+                        [closeOnSelect]="false"
+                        [(ngModel)]="fields">
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/> {{item.displayName}}
+                        </ng-template>
+                        <ng-template ng-header-tmp>
+                            <input style="width: 100%; line-height: 24px" type="text" (input)="column.filter($event.target.value)"/>
+                        </ng-template>
+                    </ng-select>
+                </div>
+            </div>
+
             <div class="table">
                 <table class="table table-striped table-hover">
                     <thead>
