@@ -14,21 +14,36 @@
                 <div class="navbar">
                     <ul class="nav navbar-nav">
                         <li class="toolbar-item">
-                            <a (click)="changeDisplayMode(displayModeEnum.Card)" [class.active]="displayMode === displayModeEnum.Card">
-                                <span class="glyphicon glyphicon-th-large"></span> Card View
-                            </a>
+                            <div class="toolbar-display-type">
+                            <ng-select
+                                    [items]="displayTypes"
+                                    [multiple]="false"
+                                    bindLabel="type"
+                                    [clearable]="false"
+                                    bindValue="id"
+                                    [(ngModel)]="displayMode">
+
+                                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                        <span class="ng-value-label"> 
+                                            <a>
+                                                <span class="{{item.iconClass}}"></span> {{item.type}}
+                                            </a>
+                                        </span>
+                                    </ng-template>
+
+                                    <ng-template ng-option-tmp let-item="item">
+                                        <span class="ng-value-label">
+                                            <a (click)="changeDisplayMode(item.id)" [class.active]="displayMode === item.id">
+                                                <span class="{{item.iconClass}}"></span> {{item.type}}
+                                            </a>
+                                        </span>
+                                    </ng-template>
+                            </ng-select>
+                        </div>
                         </li>
-                        <li class="toolbar-item">
-                            <a (click)="changeDisplayMode(displayModeEnum.Grid)" [class.active]="displayMode === displayModeEnum.Grid">
-                                <span class="glyphicon glyphicon-align-justify"></span> List View
-                            </a>
-                        </li>
-                        <li class="toolbar-item">
-                            <a (click)="lazyLoadMapComponent()" [class.active]="displayMode === displayModeEnum.Map">
-                                <span class="glyphicon glyphicon-map-marker"></span> Map View
-                            </a>
-                        </li>
-                        <li class="toolbar-item">
+
+                         
+                        <!-- <li class="toolbar-item">
                             <div class="toolbar-search-item">
                                 <ng-select #select [items]="players"
                                     bindLabel="playerName"
@@ -45,7 +60,7 @@
                                     </ng-template>
                                 </ng-select>
                             </div>
-                        </li>
+                        </li> -->
 
                         <li class="toolbar-item">
                             <a routerLink="/customers/0/edit">
@@ -88,7 +103,7 @@
             [latitude]="customer.latitude" 
             [longitude]="customer.longitude"
             [markerText]="'<h3>' + customer.firstName + ' ' + customer.lastName + '</h3>' + customer.city + ', ' + customer.state"></cm-map-point>
-        </cm-map> -->
+        </cm-map>  -->
 
         <cm-pagination
             [totalItems]="totalRecords" 

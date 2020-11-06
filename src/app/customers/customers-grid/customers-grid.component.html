@@ -1,36 +1,39 @@
 <div class="container">
+    <div>
+        <span class="column-select-list">
+            <ng-select #column [items]="allFields"
+                bindLabel="displayName"
+                placeholder="Column"
+                multiple="true"
+                [clearable]="false"
+                [closeOnSelect]="false"
+                [(ngModel)]="fields">
+                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/> {{item.displayName}}
+                </ng-template>
+                <ng-template ng-header-tmp>
+                    <input style="width: 100%; line-height: 24px" type="text" (input)="column.filter($event.target.value)"/>
+                </ng-template>
+                <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                    <!-- <div class="ng-value" *ngFor="let item of items | slice:0:1">
+                        <span class="ng-value-label"><img [src]="item.avatar_url" width="20px" height="20px"> {{item.displayName}}</span>
+                        <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                    </div> -->
+                    <!-- <div class="ng-value" *ngIf="items.length > 1">
+                        <span class="ng-value-label">{{items.length - 1}} more...</span>
+                    </div> -->
+                    <div class="ng-value">
+                        <span class="ng-value-label">Columns</span>
+                    </div> 
+                </ng-template>
+
+            </ng-select>
+        </span>
+
+    </div>
     <div class="row grid-container">
         <div class="col-md-10">
-            <div>
-                <div class="column-select-list">
-                    <ng-select #column [items]="allFields"
-                        bindLabel="displayName"
-                        placeholder="Column"
-                        multiple="true"
-                        [closeOnSelect]="false"
-                        [(ngModel)]="fields">
-                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-                            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/> {{item.displayName}}
-                        </ng-template>
-                        <ng-template ng-header-tmp>
-                            <input style="width: 100%; line-height: 24px" type="text" (input)="column.filter($event.target.value)"/>
-                        </ng-template>
-                        <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
-                            <!-- <div class="ng-value" *ngFor="let item of items | slice:0:1">
-                                <span class="ng-value-label"><img [src]="item.avatar_url" width="20px" height="20px"> {{item.displayName}}</span>
-                                <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
-                            </div> -->
-                            <!-- <div class="ng-value" *ngIf="items.length > 1">
-                                <span class="ng-value-label">{{items.length - 1}} more...</span>
-                            </div> -->
-                            <div class="ng-value">
-                                <span class="ng-value-label">Columns</span>
-                            </div> 
-                        </ng-template>
-
-                    </ng-select>
-                </div>
-            </div>
+            
 
             <div class="table">
                 <table class="table table-striped table-hover">

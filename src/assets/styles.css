@@ -63,6 +63,16 @@ th {
     width: 150px;
 }
 
+.toolbar-display-type .ng-select .ng-select-container {
+    border: none;
+    width: 120px;
+}
+
+
+
+.column-select-list{
+    display: inline-block;
+}
 .column-select-list .ng-select .ng-select-container {
     border: none;
     width: 150px;

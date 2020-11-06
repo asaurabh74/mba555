@@ -22,6 +22,12 @@ export class CustomersComponent implements OnInit {
   pageSize = 10;
   selectedFields: ICandidateField[] =[];
   allFields: ICandidateField[] =[];
+
+  displayTypes = [
+    {id: 0, iconClass: "glyphicon glyphicon-th-large", type: "Card View"},
+    {id: 1, iconClass: "glyphicon glyphicon-align-justify", type: "List View"}
+  ]
+  /*{id: 2, iconClass: "glyphicon glyphicon-map-marker", type: "Map View"},*/
   
   players = [
     {id: 1, playerName: 'Connecticut'},
@@ -59,7 +65,7 @@ export class CustomersComponent implements OnInit {
   ngOnInit() {
     this.title = 'Customers';
     this.filterText = 'Filter Customers:';
-    this.displayMode = DisplayModeEnum.Card;
+    this.displayMode = DisplayModeEnum.Grid;
 
     this.getCustomersPage(1);
     this.getSelectedFields();
