@@ -1,0 +1,16 @@
+@import '../../../styles/mixins.scss';
+
+:host {
+
+  h1 {
+
+    @include app-blur-backdrop();
+    padding: var(--app-spacing--md) var(--app-spacing--lg) var(--app-spacing--md);
+    margin-bottom: 0;
+    border-bottom: var(--app-border);
+    position: sticky;
+    top: 0;
+
+  }
+
+}

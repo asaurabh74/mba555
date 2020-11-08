@@ -1,10 +1,45 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, PreloadAllModules, NoPreloading } from '@angular/router';
+import { MasterComponent, DetailComponent } from './pages';
 
 import { PreloadModulesStrategy } from './core/strategies/preload-modules.strategy';
 
+/* Use a variable for detail routes,
+   as they need to be added to the route
+   map in 2 places (see below)... */
+   const detailRoutes = [
+    {
+      path: 'detail/:id',
+      component: DetailComponent
+    }
+  ];
+  
+
 const app_routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/customers' },
+ // { path: '', pathMatch: 'full', redirectTo: '/customers' },
+  {
+  path: '', redirectTo: 'master', pathMatch: 'full'},
+  {
+    path: 'master',
+    component: MasterComponent,
+    children: [
+      // Mobile 'Detail' Routes
+      // are children of the master...
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'detail'
+      },
+      {
+        path: 'detail',
+        component: DetailComponent
+      },
+      ...detailRoutes
+    ]
+  },
+  // Desktop 'Detail' Routes
+  // are siblings of the master...
+  ...detailRoutes,
   { path: 'customers/:id', data: { preload: true }, loadChildren: () => import('./customer/customer.module').then(m => m.CustomerModule) },
   { path: 'customers', loadChildren: () => import('./customers/customers.module').then(m => m.CustomersModule) },
   { path: 'orders', data: { preload: true }, loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule) },
