@@ -11,6 +11,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { charactersReducer } from '../state/character.reducer';
 import { StoreModule } from '@ngrx/store';
 import { CoreModule } from '../core/core.module';
+import { AngularSplitModule } from 'angular-split';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { CoreModule } from '../core/core.module';
             StoreDevtoolsModule.instrument(),
             CoreModule,
             SharedModule,
+            AngularSplitModule,
             FormsModule],
   declarations: [CustomersRoutingModule.components,
     DetailComponent,

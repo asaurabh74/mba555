@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { MasterDetailComponent } from './components';
 import { MasterRouterLinkDirective } from './directives';
 import { BreakpointService } from './services';
+import { AngularSplitModule } from 'angular-split'
 
 const components = [ MasterDetailComponent ];
 const directives = [ MasterRouterLinkDirective ];
@@ -15,6 +16,7 @@ const directives = [ MasterRouterLinkDirective ];
   ],
   imports: [
     LayoutModule,
+    AngularSplitModule,
     RouterModule.forChild([])
   ],
   exports: [

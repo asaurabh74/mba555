@@ -19,9 +19,11 @@
     font-weight: 500;
     color: var(--app-color-text-secondary);
     background: var(--app-color-background);
+    width: 100%;
 
     .__content-text {
       text-align: center;
+      width: 100%;
     }
 
     h1 {
