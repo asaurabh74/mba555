@@ -52,7 +52,7 @@ const characterReducer = createReducer(
   initialState,
 
   on(actions.loadCharacters, (state, { characters }) =>
-    adapter.addMany(characters, state))
+    adapter.setAll(characters, state))
 
 );
 
