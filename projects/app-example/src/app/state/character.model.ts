@@ -1,5 +1,5 @@
-export interface Character {
-  id: string;
-  title: string;
-  description: string;
-}
+// export interface Character {
+//   id: string;
+//   title: string;
+//   description: string;
+// }

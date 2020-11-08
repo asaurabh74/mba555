@@ -1,17 +1,19 @@
 import { Action, on, createReducer } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { Character } from './character.model';
+//import { Character } from './character.model';
 import * as actions from './character.actions';
+import { ICustomer } from '../shared/interfaces';
 
-export interface CharacterState extends EntityState<Character> { }
-export const adapter: EntityAdapter<Character> = createEntityAdapter<Character>();
+export interface CharacterState extends EntityState<ICustomer> { }
+export const adapter: EntityAdapter<ICustomer> = createEntityAdapter<ICustomer>();
 
 /* ------------------------------------------------- */
 /* NOTE: For demonstration purposes, just hard       */
 /*       code the characters in the state store      */
 /* ------------------------------------------------- */
 
-var is = {
+
+export const ISDATA = {
   ids: [
     0, 1, 2, 3, 4,
     5, 6, 8, 9, 10,
@@ -38,6 +40,10 @@ var is = {
 }; 
 
 export function getInitialState() {
+  var is = {
+    ids: [],
+    entities: {}
+  }
   return is;
 }
 export const initialState: CharacterState = adapter.getInitialState(getInitialState());

@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { Character, selectCharacterById } from '../../state';
+import { selectCharacterById } from '../../state';
+import { ICustomer } from '../../shared/interfaces';
 
 @Component({
   selector: 'app-detail',
@@ -12,7 +13,7 @@ import { Character, selectCharacterById } from '../../state';
 export class DetailComponent implements OnInit, OnDestroy {
 
   public routeChangeSub$: Subscription;
-  public character$: Observable<Character>;
+  public character$: Observable<ICustomer>;
 
   constructor(
     public router: Router,

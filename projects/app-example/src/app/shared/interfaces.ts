@@ -4,6 +4,7 @@ import { Routes } from '@angular/router';
 export interface ICustomer {
     id: number;
     firstName: string;
+    summary?: string;
     lastName: string;
     gender: string;
     address: string;

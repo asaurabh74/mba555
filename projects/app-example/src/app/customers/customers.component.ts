@@ -6,6 +6,8 @@ import { ICustomer, IPagedResults ,ICandidateField} from '../shared/interfaces';
 import { FilterService } from '../core/services/filter.service';
 import { LoggerService } from '../core/services/logger.service';
 
+import { Store, select } from '@ngrx/store';
+import { loadCharacters } from '../state/character.actions';
 
 @Component({
   selector: 'cm-customers',
@@ -13,6 +15,7 @@ import { LoggerService } from '../core/services/logger.service';
 })
 export class CustomersComponent implements OnInit {
 
+  //@Output() filterChangedEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
   title: string;
   filterText: string;
   customers: ICustomer[] = [];
@@ -22,6 +25,8 @@ export class CustomersComponent implements OnInit {
   pageSize = 10;
   selectedFields: ICandidateField[] =[];
   allFields: ICandidateField[] =[];
+
+
 
   displayTypes = [
     {id: 0, iconClass: "glyphicon glyphicon-th-large", type: "Card View"},
@@ -60,7 +65,8 @@ export class CustomersComponent implements OnInit {
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
     private dataService: DataService,
     private filterService: FilterService,
-    private logger: LoggerService) { }
+    private logger: LoggerService,
+    public store: Store<any>) { }
 
   ngOnInit() {
     this.title = 'Customers';
@@ -85,6 +91,10 @@ export class CustomersComponent implements OnInit {
         .subscribe((response: IPagedResults<ICustomer[]>) => {
           this.customers = this.filteredCustomers = response.results;
           this.totalRecords = response.totalRecords;
+          //this.filterChangedEmitter.emit(true); // Raise changed event
+          this.store.dispatch(loadCharacters({
+            characters:  this.filteredCustomers
+          }));
         },
         (err: any) => this.logger.log(err),
         () => this.logger.log('getCustomersPage() retrieved customers for page: ' + page));
@@ -111,11 +121,16 @@ export class CustomersComponent implements OnInit {
   filterChanged(data: string) {
     if (data && this.customers) {
         data = data.toUpperCase();
-        const props = ['firstName', 'lastName', 'city', 'state.name'];
+        const props = ['firstName', 'lastName', 'city', 'state', 'summary'];
         this.filteredCustomers = this.filterService.filter<ICustomer>(this.customers, data, props);
     } else {
       this.filteredCustomers = this.customers;
     }
+   // this.filterChangedEmitter.emit(true); // Raise changed event
+     this.store.dispatch(loadCharacters({
+      characters:  this.filteredCustomers
+    }));
+
   }
 
   async lazyLoadMapComponent() {

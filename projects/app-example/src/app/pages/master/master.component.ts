@@ -2,8 +2,12 @@ import { Observable, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { Character, selectAllCharacters, getAllCharactersSelector, selectCharacterById } from '../../state';
+import { selectAllCharacters, getAllCharactersSelector, selectCharacterById } from '../../state';
 import { ICustomer, ICandidateField } from '../../shared/interfaces';
+
+import { loadCharacters } from '../../state/character.actions';
+
+
 
 @Component({
   selector: 'app-master',
@@ -13,8 +17,9 @@ import { ICustomer, ICandidateField } from '../../shared/interfaces';
 export class MasterComponent implements OnInit, OnDestroy {
 
   public routeChangeSub$: Subscription;
-  public character$: Observable<Character>;
-  public characters$: Observable<Character[]>;
+  public character$: Observable<ICustomer>;
+  public characters$: Observable<ICustomer[]>;
+  //public sub: Subscription;
 
   @Input() customers: ICustomer[] = [];
   @Input() fields: ICandidateField[] = [];
@@ -27,11 +32,18 @@ export class MasterComponent implements OnInit, OnDestroy {
       this.characters$ = this.store.select(getAllCharactersSelector());
   }
 
+
+  
   ngOnInit() {
     /* ------------------------------------------------- */
     /* Listen for changes in the route, then highlight   */
     /* the selected item in the list...                  */
     /* ------------------------------------------------- */
+
+
+    // this.store.dispatch(loadCharacters({
+    //     characters:  this.customers
+    // }));
     if (this.route.firstChild) {
       this.routeChangeSub$ = this.route.firstChild.paramMap
         .subscribe((map: ParamMap) =>
