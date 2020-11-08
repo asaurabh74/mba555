@@ -4,8 +4,8 @@
   "newProjectRoot": "projects",
   "projects": {
     "angular-jumpstart": {
-      "root": "",
-      "sourceRoot": "src",
+      "root": "projects/app-example",
+      "sourceRoot":  "projects/app-example/src",
       "projectType": "application",
       "architect": {
         "build": {
@@ -13,16 +13,16 @@
           "options": {
             "aot": true,
             "outputPath": "dist",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "tsConfig": "tsconfig.app.json",
-            "polyfills": "src/polyfills.ts",
+            "index": "projects/app-example/src/index.html",
+            "main": "projects/app-example/src/main.ts",
+            "tsConfig": "projects/app-example/tsconfig.app.json",
+            "polyfills": "projects/app-example/src/polyfills.ts",
             "assets": [
-              "src/assets",
-              "src/favicon.ico"
+              "projects/app-example/src/assets",
+              "projects/app-example/src/favicon.ico"
             ],
             "styles": [
-              "src/styles.css"
+              "projects/app-example/src/styles.scss"
             ],
             "scripts": []
           },
@@ -45,8 +45,8 @@
               "buildOptimizer": true,
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "projects/app-example/src/environments/environment.ts",
+                  "with": "projects/app-example/src/environments/environment.prod.ts"
                 }
               ]
             }
@@ -79,8 +79,8 @@
             "scripts": [],
             "styles": [],
             "assets": [
-              "src/assets",
-              "src/favicon.ico"
+              "projects/app-example/src/assets",
+              "projects/app-example/src/favicon.ico"
             ]
           }
         },
@@ -88,8 +88,9 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json"
+              "projects/app-example/tsconfig.app.json",
+              "projects/app-example/tsconfig.spec.json",
+              "projects/app-example/tsconfig.json"
             ],
             "exclude": [
               "**/node_modules/**",
@@ -107,7 +108,7 @@
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "./protractor.conf.js",
+            "protractorConfig": "./projects/app-example/protractor.conf.js",
             "devServerTarget": "angular-jumpstart:serve"
           }
         },
@@ -133,17 +134,17 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/playground",
-            "index": "src/index.html",
-            "main": "src/main.playground.ts",
-            "polyfills": "src/polyfills.ts",
+            "index": "projects/app-example/src/index.html",
+            "main": "projects/app-example/src/main.playground.ts",
+            "polyfills": "projects/app-example/src/polyfills.ts",
             "tsConfig": "tsconfig.playground.json",
             "aot": false,
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "projects/app-example/src/favicon.ico",
+              "projects/app-example/src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "projects/app-example/src/styles.scss"
             ],
             "scripts": []
           },
@@ -151,8 +152,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "projects/app-example/src/environments/environment.ts",
+                  "with": "projects/app-example/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
