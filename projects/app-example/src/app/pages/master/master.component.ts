@@ -1,8 +1,9 @@
 import { Observable, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { Character, selectAllCharacters, selectCharacterById } from '../../state';
+import { Character, selectAllCharacters, getAllCharactersSelector, selectCharacterById } from '../../state';
+import { ICustomer, ICandidateField } from '../../shared/interfaces';
 
 @Component({
   selector: 'app-master',
@@ -15,11 +16,15 @@ export class MasterComponent implements OnInit, OnDestroy {
   public character$: Observable<Character>;
   public characters$: Observable<Character[]>;
 
+  @Input() customers: ICustomer[] = [];
+  @Input() fields: ICandidateField[] = [];
+  @Input() allFields: ICandidateField[] = [];
+
   constructor(
     public router: Router,
     public route: ActivatedRoute,
     public store: Store<any>) {
-      this.characters$ = this.store.select(selectAllCharacters);
+      this.characters$ = this.store.select(getAllCharactersSelector());
   }
 
   ngOnInit() {
@@ -35,7 +40,9 @@ export class MasterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.routeChangeSub$.unsubscribe();
+    if (this.routeChangeSub$){
+      this.routeChangeSub$.unsubscribe();
+    }
   }
 
   getRouteParams(map: ParamMap): number {

@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { LayoutModule } from '@angular/cdk/layout';
 import { RouterModule } from '@angular/router';
 import { MasterDetailComponent } from './components';
@@ -15,9 +14,8 @@ const directives = [ MasterRouterLinkDirective ];
     ...directives
   ],
   imports: [
-    BrowserModule,
     LayoutModule,
-    RouterModule.forRoot([])
+    RouterModule.forChild([])
   ],
   exports: [
     ...components,

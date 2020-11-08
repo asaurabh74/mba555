@@ -1,13 +1,12 @@
 <lib-master-detail>
   <app-header
-    [title]="'Master'">
+    [title]="'Candidates'">
   </app-header>
   <ul>
     <li *ngFor="let character of (characters$ | async)">
       <app-list-item
         [libMasterRouterLink]="['detail', character.id]"
         [title]="character.title"
-        [description]="character.description"
         [isSelected]="(character$ | async) && (character$ | async).id == character.id">
       </app-list-item>
     </li>

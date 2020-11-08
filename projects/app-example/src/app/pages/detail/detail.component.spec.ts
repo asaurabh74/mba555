@@ -31,7 +31,7 @@ describe('<app-detail/> Page', () => {
       ],
       imports: [
         LibMasterDetailModule,
-        RouterModule.forRoot([]),
+        RouterModule.forChild([]),
         StoreModule.forRoot({ characters: charactersReducer }),
       ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

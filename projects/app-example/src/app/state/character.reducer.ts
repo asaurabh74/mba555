@@ -10,7 +10,8 @@ export const adapter: EntityAdapter<Character> = createEntityAdapter<Character>(
 /* NOTE: For demonstration purposes, just hard       */
 /*       code the characters in the state store      */
 /* ------------------------------------------------- */
-export const initialState: CharacterState = adapter.getInitialState({
+
+var is = {
   ids: [
     0, 1, 2, 3, 4,
     5, 6, 8, 9, 10,
@@ -34,7 +35,12 @@ export const initialState: CharacterState = adapter.getInitialState({
     [14]: { id: 14, title: 'Dave Spradling', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit' },
     [15]: { id: 15, title: 'Harry Caesar', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit' }
   }
-});
+}; 
+
+export function getInitialState() {
+  return is;
+}
+export const initialState: CharacterState = adapter.getInitialState(getInitialState());
 
 const characterReducer = createReducer(
   initialState,

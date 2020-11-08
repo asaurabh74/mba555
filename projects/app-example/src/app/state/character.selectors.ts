@@ -19,6 +19,10 @@ export const selectAllCharacters = createSelector(
   fromCharacter.selectAllCharactersAdapter
 );
 
+export function getAllCharactersSelector () {
+  return selectAllCharacters;
+}
+
 export const selectCharacterById = createSelector(
   selectCharacterState,
   (state, props) => state.entities[props.id]

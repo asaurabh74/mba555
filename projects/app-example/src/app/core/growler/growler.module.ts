@@ -15,6 +15,10 @@ export class GrowlerModule extends EnsureModuleLoadedOnceGuard {    // Ensure th
 
   // Looks for the module in the parent injector to see if it's already been loaded (only want it loaded once)
   constructor(@Optional() @SkipSelf() parentModule: GrowlerModule) {
-    super(parentModule);
+    try{
+      super(parentModule);
+    } catch (e) {
+      console.log(e);
+    }
   }
 }

@@ -74,9 +74,15 @@
             </div>
         </div>
         
-        <cm-customers-card 
+        <!-- <cm-customers-card 
           [customers]="filteredCustomers" 
-          [hidden]="displayMode !== displayModeEnum.Card"></cm-customers-card>
+          [hidden]="displayMode !== displayModeEnum.Card"></cm-customers-card> -->
+
+          <app-master
+          [customers]="filteredCustomers" 
+          [fields]="selectedFields"
+          [allFields]="allFields"
+          [hidden]="displayMode !== displayModeEnum.Card"></app-master> 
     
         <cm-customers-grid 
           [customers]="filteredCustomers" 
