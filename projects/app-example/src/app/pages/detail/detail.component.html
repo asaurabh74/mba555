@@ -19,11 +19,21 @@
 
     <div style="width: 100%; height: 500px; background: white;">
       <as-split unit="percent" direction="horizontal">
-        <as-split-area [size]="40">
-          <p>LEFT</p>
+        <as-split-area [size]="50">
+          <div *ngFor="let customField of editFields;">
+            <span class="fieldLabel">{{ customField.displayName }}:</span>
+            <app-edit-input class="fieldValue"
+              [fieldObj]="customField"
+              [data]= "getFieldValue(customField, (character$ | async))"
+              (focusOut)="saveData($event)"></app-edit-input>
+          </div>
+
         </as-split-area>
-        <as-split-area [size]="60">
-          <p>RIGHT</p>
+        <as-split-area [size]="50">
+          <div *ngFor="let customField of readFields;">
+            <span class="fieldLabel">{{ customField.displayName }}:</span>
+            <span class="fieldValue">{{ getFieldValue(customField, (character$ | async)) }}</span>
+          </div>
         </as-split-area>
       </as-split>
     </div>

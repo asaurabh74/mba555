@@ -20,6 +20,15 @@ export interface ICustomer {
 export interface ICandidateField {
     name: string;
     displayName?: string;
+    fieldName: string;
+    editable: boolean;
+    type: string;
+}
+
+
+export interface EditOutput {
+    newObj: JSON;
+    oldObj: JSON;
 }
 
 export interface IMapDataPoint {

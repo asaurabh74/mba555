@@ -13,6 +13,10 @@ import { StoreModule } from '@ngrx/store';
 import { CoreModule } from '../core/core.module';
 import { AngularSplitModule } from 'angular-split';
 
+import { EditInputComponent } from '../edit-input/edit-input.component';
+import { AutofocusDirective } from '../shared/directives/autofocus.directive';
+
+
 
 @NgModule({
   imports: [CustomersRoutingModule,
@@ -30,7 +34,9 @@ import { AngularSplitModule } from 'angular-split';
     DetailComponent,
     MasterComponent,
     HeaderComponent,
-    ListItemComponent
+    ListItemComponent,
+    EditInputComponent,
+    AutofocusDirective
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
