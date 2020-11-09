@@ -1,0 +1,59 @@
+@import '../../../styles/mixins.scss';
+
+:host {
+
+  display: block;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+
+  .__component {
+
+    @include app-transition();
+    user-select: none;
+
+    &:hover {
+      @include app-blur-backdrop();
+    }
+
+    &.--is-selected {
+
+      background: var(--app-color-background-highlight);
+      position: relative;
+
+      p {
+        color: var(--app-color-text-secondary-highlight);
+      }
+
+      &::after {
+        content: '\b7';
+        color: var(--app-color-primary);
+        font-size: 60px;
+        line-height: 0px;
+        position: absolute;
+        top: 26px;
+        left: 3px;
+      }
+
+    }
+
+  }
+
+  .__inner {
+    margin-left: var(--app-spacing--lg);
+    padding: var(--app-spacing--md) var(--app-spacing--md) var(--app-spacing--md) 0;
+    border-bottom: var(--app-border);
+    border-right: var(--app-border);
+  }
+
+  h1, h2, p {
+    text-overflow: inherit;
+    overflow: inherit;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+}

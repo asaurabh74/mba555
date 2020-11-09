@@ -1,0 +1,15 @@
+<div *ngIf='!editMode' (click)='editMode=true' class='cell'> {{ data }}</div>
+
+<input *ngIf='isTextEditMode()' (focusout)="onFocusOut()" (keydown.enter)='$event.target.blur()' [(ngModel)]='data' class='cellInput'
+  appAutofocus type='text' (keydown.enter)='$event.target.blur()' (focusout)="editMode=false">
+
+<input *ngIf='isNumberEditMode()' (focusout)="onFocusOut()" (keydown.enter)='$event.target.blur()' [(ngModel)]='data' class='cellInput'
+  appAutofocus type='number' (keydown.enter)='$event.target.blur()' (focusout)="editMode=false">
+
+  <input *ngIf='isNumberEditMode()' (focusout)="onFocusOut()" (keydown.enter)='$event.target.blur()' [(ngModel)]='data' class='cellInput'
+  appAutofocus type='number' (keydown.enter)='$event.target.blur()' (focusout)="editMode=false">
+
+  <select *ngIf='isSelectEditMode()' (focusout)="onFocusOut()" (keydown.enter)='$event.target.blur()' [(ngModel)]='data' class='cellInput'
+  appAutofocus type='number' (keydown.enter)='$event.target.blur()' (focusout)="editMode=false">
+  </select>
+

@@ -1,0 +1,17 @@
+<div class="__back"
+  data-test="backButton"
+  [routerLink]="[backRoute]"
+  [style.visibility]="showBack && !breakpointService.isDesktop ? 'visible' : 'hidden'"
+  [style.display]="showBack && !breakpointService.isDesktop ? 'display' : 'none'">
+
+  <ion-icon name="arrow-back"></ion-icon>
+
+  <span class="__back-text">
+    Back
+  </span>
+
+</div>
+
+<h1 data-test="headerTitle">
+  {{ title || defaultTitle }}
+</h1>

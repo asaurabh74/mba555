@@ -121,18 +121,6 @@
       "check-separator",
       "check-type"
     ],
-    "directive-selector": [
-      true,
-      "attribute",
-      "cm",
-      "camelCase"
-    ],
-    "component-selector": [
-      true,
-      "element",
-      "cm",
-      "kebab-case"
-    ],
     "no-inputs-metadata-property": true,
     "no-outputs-metadata-property": true,
     "no-host-metadata-property": true,

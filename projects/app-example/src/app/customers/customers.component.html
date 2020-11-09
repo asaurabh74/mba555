@@ -1,0 +1,120 @@
+<div class="customers view indent">
+    <div class="container">
+        <header>
+            <h3>
+                <span class="glyphicon glyphicon-user"></span>
+                <!-- {{ title }} -->
+                Candidates
+                
+            </h3>
+        </header>
+        <br />
+        <div class="row">
+            <div class="col-md-10">
+                <div class="navbar">
+                    <ul class="nav navbar-nav">
+                        <li class="toolbar-item">
+                            <div class="toolbar-display-type">
+                            <ng-select
+                                    [items]="displayTypes"
+                                    [multiple]="false"
+                                    bindLabel="type"
+                                    [clearable]="false"
+                                    bindValue="id"
+                                    [(ngModel)]="displayMode">
+
+                                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                        <span class="ng-value-label"> 
+                                            <a>
+                                                <span class="{{item.iconClass}}"></span> {{item.type}}
+                                            </a>
+                                        </span>
+                                    </ng-template>
+
+                                    <ng-template ng-option-tmp let-item="item">
+                                        <span class="ng-value-label">
+                                            <a (click)="changeDisplayMode(item.id)" [class.active]="displayMode === item.id">
+                                                <span class="{{item.iconClass}}"></span> {{item.type}}
+                                            </a>
+                                        </span>
+                                    </ng-template>
+                            </ng-select>
+                        </div>
+                        </li>
+
+                         
+                        <!-- <li class="toolbar-item">
+                            <div class="toolbar-search-item">
+                                <ng-select #select [items]="players"
+                                    bindLabel="playerName"
+                                    placeholder="Select State"
+                                    appendTo="body"
+                                    multiple="true"
+                                    [closeOnSelect]="false"
+                                    [(ngModel)]="selected">
+                                    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                        <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/> {{item.playerName}}
+                                    </ng-template>
+                                    <ng-template ng-header-tmp>
+                                        <input style="width: 100%; line-height: 24px" type="text" (input)="select.filter($event.target.value)"/>
+                                    </ng-template>
+                                </ng-select>
+                            </div>
+                        </li> -->
+
+                        <li class="toolbar-item">
+                            <a routerLink="/customers/0/edit">
+                                <span class="glyphicon glyphicon-plus"></span> New Candidate
+                            </a>
+                        </li>
+                    </ul>
+                    <cm-filter-textbox class="navbar-right"
+                     (changed)="filterChanged($event)"></cm-filter-textbox>
+                </div>
+            </div>
+        </div>
+        
+        <!-- <cm-customers-card 
+          [customers]="filteredCustomers" 
+          [hidden]="displayMode !== displayModeEnum.Card"></cm-customers-card> -->
+
+          <app-master
+          [customers]="filteredCustomers" 
+          [fields]="selectedFields"
+          [allFields]="allFields"
+          [hidden]="displayMode !== displayModeEnum.Card"></app-master> 
+    
+        <cm-customers-grid 
+          [customers]="filteredCustomers" 
+          [fields]="selectedFields"
+          [allFields]="allFields"
+          [hidden]="displayMode !== displayModeEnum.Grid"></cm-customers-grid>
+
+        <!-- lazy load the map component -->
+        <div [hidden]="displayMode !== displayModeEnum.Map">
+            <ng-container #mapsContainer></ng-container>
+        </div>
+
+        <!-- 
+            This could be used to eagerly load the map component.
+            Would need to import MapModule into either SharedModule (and export it) or 
+            into CustomersModule to use it this way.
+        -->
+        <!-- <cm-map *ngIf="filteredCustomers.length" 
+            [zoom]="2" 
+            [enabled]="displayMode === displayModeEnum.Map" 
+            [hidden]="displayMode !== displayModeEnum.Map">
+          <cm-map-point 
+            *ngFor="let customer of filteredCustomers" 
+            [latitude]="customer.latitude" 
+            [longitude]="customer.longitude"
+            [markerText]="'<h3>' + customer.firstName + ' ' + customer.lastName + '</h3>' + customer.city + ', ' + customer.state"></cm-map-point>
+        </cm-map>  -->
+
+        <cm-pagination
+            [totalItems]="totalRecords" 
+            [pageSize]="pageSize" 
+            (pageChanged)="pageChanged($event)"></cm-pagination>
+          
+    </div>
+</div>

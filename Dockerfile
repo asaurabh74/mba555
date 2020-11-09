@@ -22,6 +22,10 @@ RUN npm install -g @angular/cli@7.3.9
 RUN npm install
 RUN ng build --outputPath=dist
 
+RUN npm install oauth
+RUN mv node_oauth/lib/*.js node_modules/oauth/lib/
+RUN mv node_oauth/index.js node_modules/oauth/
+
 EXPOSE 8080
 EXPOSE 8443
 
