@@ -23,16 +23,16 @@ function Jiralib(opts, adminClient) {
         }
     }
 
-    this.customFieldNames = {firstName:"First Name", 
-                             lastName:"Last Name", 
-                             address: "Address",
-                             GT_ASVAB_SCORE: "GT_ASVAB_SCORE", 
-                             city: "City",
-                             state: "State",
-                             zip: "Zip",
-                             GM_ASVAB_SCORE: "GM_ASVAB_SCORE", 
-                             ST_ASVAB_SCORE: "ST_ASVAB_SCORE", 
-                             gender: "gender"};
+    // this.customFieldNames = {firstName:"First Name", 
+    //                          lastName:"Last Name", 
+    //                          address: "Address",
+    //                          GT_ASVAB_SCORE: "GT_ASVAB_SCORE", 
+    //                          city: "City",
+    //                          state: "State",
+    //                          zip: "Zip",
+    //                          GM_ASVAB_SCORE: "GM_ASVAB_SCORE", 
+    //                          ST_ASVAB_SCORE: "ST_ASVAB_SCORE", 
+    //                          gender: "gender"};
  
     this.getCandidates = async (jql, startAt, maxResults) => {
         var customFields = [
@@ -47,8 +47,8 @@ function Jiralib(opts, adminClient) {
 
         var customFieldNames = this.adminClient.getCustomFieldNames();
         
-        for (var x in customFieldNames) {
-            await this.addField(customFields, customFieldNames[x]);
+        for (var x=0; x<customFieldNames.length; ++x) {
+            await this.addField(customFields, customFieldNames[x].fieldName);
         }
         
         jql = jql || "";
@@ -74,10 +74,11 @@ function Jiralib(opts, adminClient) {
                 assigneeName: fields.assignee ? fields.assignee.displayName : "",
                 assigneeEmail: fields.assignee ? fields.assignee.emailAddress : ""
             };
-            for (var id in customFieldNames) {
-                 var customField =  await this.adminClient.getCustomField(customFieldNames[id]);
+
+            for (var y=0; y<customFieldNames.length; ++y) {
+                 var customField =  await this.adminClient.getCustomField(customFieldNames[y].fieldName);
                  if (customField) {
-                    candidate[id] = fields[customField.id];
+                    candidate[customFieldNames[y].name] = fields[customField.id];
                  }
             }
             // var state = {
@@ -98,12 +99,9 @@ function Jiralib(opts, adminClient) {
     this.getSelectedFieldNames = () => {
         var customFieldNames = this.adminClient.getCustomFieldNames();
         var  fields = [];
-        for (var id in customFieldNames) {
-            if (this.selectedFieldNames.indexOf(id) !== -1) {
-                fields.push({
-                    name: id,
-                    displayName: customFieldNames[id]
-                });
+        for (var x=0; x<customFieldNames.length; ++x) {
+            if (this.selectedFieldNames.indexOf(customFieldNames[x].name) !== -1) {
+                fields.push(customFieldNames[x]);
             }
         }
         return fields;
