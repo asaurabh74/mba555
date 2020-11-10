@@ -29,7 +29,7 @@
   z-index: 999999;
   top: 50%;
   left: 50%;
-  background-color: white;
+  : white;
   border: 1px solid rgb(94, 94, 94);
   -webkit-transform: translate(-50%, 0%);
           transform: translate(-50%, 0%);

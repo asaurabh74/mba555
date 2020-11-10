@@ -67,7 +67,21 @@ th {
     border: none;
     width: 120px;
 }
+.glyphicon {
+    color: #777777;
+}
 
+.toolbar-display-type  .ng-value-label {
+    color: #777777;
+}
+
+.ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value {
+    background-color: #FFFFFF !important;
+}
+
+.ng-value-label>a {
+    color: #777777;
+}
 
 
 .column-select-list{
@@ -75,7 +89,7 @@ th {
 }
 .column-select-list .ng-select .ng-select-container {
     border: none;
-    width: 150px;
+    width: 140px;
 }
 
 .column-select-list .ng-dropdown-panel {
@@ -111,7 +125,7 @@ a.navbar-brand {
 
 .navbar-inner {
     padding-left: 0px;
-    background-color: #027FF4;
+    background-color: #222222;
 }
 
 .navbar-inner.toolbar {

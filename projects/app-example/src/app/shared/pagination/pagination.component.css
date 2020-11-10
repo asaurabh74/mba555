@@ -4,10 +4,18 @@
 .pagination>.active>span, 
 .pagination>.active>span:focus, 
 .pagination>.active>span:hover {
-  background-color: #027FF4;
-  border-color: #027FF4;
+  background-color: #777777;
+  border-color: #777777;
 }
 
 .pagination a {
     cursor: pointer;
+}
+
+.pagination>li>a {
+  color: #777777;
+}
+
+.pagination>.active>a {
+  color: #FFFFFF;
 }
