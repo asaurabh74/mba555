@@ -103,8 +103,6 @@ app.get('/api/customers/page/:skip/:top', auth, (req, res) => {
     console.log(`Skip: ${skip} Top: ${top}`);
 
     jiraClient.getCandidates(jql, skip, top-skip).then(pagedCustomers=>{
-        console.log(pagedCustomers);
-
         res.setHeader('X-InlineCount', 51);
         res.json(pagedCustomers);
 

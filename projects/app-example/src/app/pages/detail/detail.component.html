@@ -1,5 +1,5 @@
 <app-header class="__header" [showBack]="true"
-  [title]="(character$ | async) && (character$ | async).summary">
+  [title]="(character$ | async) && ((character$ | async).firstName + ' ' + (character$ | async).lastName)">
 </app-header>
 
 <section class="__content">

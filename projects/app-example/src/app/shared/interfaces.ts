@@ -17,12 +17,18 @@ export interface ICustomer {
     checked?: boolean;
 }
 
+export interface IFieldOption {
+    id: string;
+    value: string;
+}
+
 export interface ICandidateField {
     name: string;
     displayName?: string;
     fieldName: string;
     editable: boolean;
     type: string;
+    options?: IFieldOption[];
 }
 
 

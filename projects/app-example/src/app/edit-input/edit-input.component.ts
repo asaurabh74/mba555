@@ -30,7 +30,14 @@ export class EditInputComponent implements OnInit {
   }
 
   isSelectEditMode() {
-    return this.editMode && this.fieldObj  && this.fieldObj.type === "select";
+    return this.editMode && this.fieldObj  && (this.fieldObj.type === "select" || this.fieldObj.type === "option");
+  }
+
+  getData() {
+    if ((this.fieldObj.type === "select" || this.fieldObj.type === "option") && this.data && this.data.value) {
+      return this.data.value;
+    }
+    return this.data;
   }
 
   onFocusOut() {

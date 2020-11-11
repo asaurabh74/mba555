@@ -19,8 +19,54 @@ function JiraAdminlib() {
     this.getAllFields =  async () => {
         if (!this.fields) {
             this.fields = await this.adminClient.field.getAllFields();
+            await this.populateOptions();
         }
         return this.fields;
+    }
+
+    this.issueMetaData;
+
+    this.getAvailableOptions = async (name) => {
+        if (!this.issueMetaData) {
+            var options = {
+                expand: "projects.issuetypes.fields"
+            };
+            this.issueMetaData = await this.adminClient.issue.getCreateMetadata(options);
+        }
+        if (this.issueMetaData && this.issueMetaData.projects && this.issueMetaData.projects.length >0) {
+            var project = this.issueMetaData.projects[0];
+            if (project.issuetypes && project.issuetypes.length>0) {
+                var issueType = project.issuetypes[0];
+                var field = issueType.fields[name];
+                if (field && field.allowedValues) {
+                    return field.allowedValues;
+                }
+            }
+        }
+        return [];
+    }
+
+    this.populateOptions = async () => {
+        for (var x=0; x< this.customFieldNames.length; ++x){
+            var customField = await this.getCustomField(this.customFieldNames[x].fieldName);
+
+            if (customField && customField.schema && customField.schema.type) {
+                this.customFieldNames[x].type = customField.schema.type;
+            }
+            if (customField && customField.schema && customField.schema.type === 'option') {
+                customField.allowedValues = await this.getAvailableOptions(customField.id);
+                if (customField.allowedValues) {
+                    var options = [];
+                    for (var y=0; y< customField.allowedValues.length; ++y) {
+                        options.push  ({
+                            id: customField.allowedValues[y].id,
+                            value: customField.allowedValues[y].value,
+                        });
+                    }
+                    this.customFieldNames[x].options = options;
+                }
+            }
+        }
     }
 
     this.getCustomField = async (name) => {
@@ -44,8 +90,8 @@ function JiraAdminlib() {
         {"name": "gender", "displayName":  "Gender", "fieldName": "gender", "editable": false, "type": "string"},
         {"name": "qualWomos", "displayName":  "QUAL WOMOS", "fieldName": "QUAL WOMOS", "editable": true, "type": "string"},
         {"name": "primaryWomos", "displayName":  "Primary MOS", "fieldName": "PRIMARY MOS", "editable": true, "type": "string"},
-        {"name": "rank", "displayName":  "Rank", "fieldName": "ARSOF Rank", "editable": true, "type": "select"},
-        {"name": "leadStatus", "displayName":  "Lead Status", "fieldName": "Rank", "editable": true, "type": "select"}
+        {"name": "rank", "displayName":  "Rank", "fieldName": "Rank", "editable": true, "type": "select"},
+       {"name": "leadStatus", "displayName":  "Lead Status", "fieldName": "Rank", "editable": true, "type": "select"}
     ]
     
      this.getCustomFieldNames = () => {
@@ -55,4 +101,6 @@ function JiraAdminlib() {
      this.getCustomFieldNamesJSON = () => {
         return this.getCustomFieldNames();
     }
+
+    // populate options
   }

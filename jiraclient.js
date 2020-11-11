@@ -42,7 +42,7 @@ function Jiralib(opts, adminClient) {
             "priority",
             "project",
             "assignee",
-            "reporter",
+            "reporter"
         ];
 
         var customFieldNames = this.adminClient.getCustomFieldNames();
@@ -86,7 +86,7 @@ function Jiralib(opts, adminClient) {
             //     "name": candidate.state,
             // }
             // candidate.state = state;
-            candidate.gender = candidate.gender || "male";
+            candidate.gender = candidate.gender || "Male";
             candidates.push(candidate);
            }
         

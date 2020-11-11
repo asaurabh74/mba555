@@ -6,7 +6,7 @@
     <li *ngFor="let character of (characters$ | async)">
       <app-list-item
         [libMasterRouterLink]="['detail', character.id]"
-        [title]="character.summary"
+        [title]="character.firstName + ' ' + character.lastName"
         [isSelected]="(character$ | async) && (character$ | async).id == character.id">
       </app-list-item>
     </li>

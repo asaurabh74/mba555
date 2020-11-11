@@ -1,4 +1,4 @@
-<div *ngIf='!editMode' (click)='editMode=true' class='cell'> {{ data }}</div>
+<div *ngIf='!editMode' (click)='editMode=true' class='cell'> {{ getData()}}</div>
 
 <input *ngIf='isTextEditMode()' (focusout)="onFocusOut()" (keydown.enter)='$event.target.blur()' [(ngModel)]='data' class='cellInput'
   appAutofocus type='text' (keydown.enter)='$event.target.blur()' (focusout)="editMode=false">
@@ -11,5 +11,6 @@
 
   <select *ngIf='isSelectEditMode()' (focusout)="onFocusOut()" (keydown.enter)='$event.target.blur()' [(ngModel)]='data' class='cellInput'
   appAutofocus type='number' (keydown.enter)='$event.target.blur()' (focusout)="editMode=false">
+    <option *ngFor="let option of fieldObj.options" [ngValue]="option">{{option.value}}</option>
   </select>
 
