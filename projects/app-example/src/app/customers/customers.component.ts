@@ -25,6 +25,9 @@ export class CustomersComponent implements OnInit {
   pageSize = 20;
   selectedFields: ICandidateField[] =[];
   allFields: ICandidateField[] =[];
+  filterSelectedFields: ICandidateField[] =[];
+
+  filterData: any[] =[];
 
 
 
@@ -44,7 +47,7 @@ export class CustomersComponent implements OnInit {
     {id: 7, playerName: 'Texas'},
   ];
   selected = [
-    {id: 2, playerName: 'Georgia'}
+    //{id: 2, playerName: 'Georgia'}
   ];
 
   mapComponentRef: ComponentRef<any>;

@@ -43,7 +43,6 @@ export class CustomersGridComponent implements OnInit {
   }
   
   getData(customer: ICustomer, field :ICandidateField){
-    console.log (customer);
     if (field.type === 'option' || field.type === 'select') {
       if (customer[field.name])
         return customer[field.name].value;

@@ -42,8 +42,7 @@
                         </div>
                         </li>
 
-                         
-                        <!-- <li class="toolbar-item">
+                          <!-- <li class="toolbar-item">
                             <div class="toolbar-search-item">
                                 <ng-select #select [items]="players"
                                     bindLabel="playerName"
@@ -62,10 +61,64 @@
                             </div>
                         </li> -->
 
+                        <li *ngFor="let filterField of selected">
+                            <div class="toolbar-display-type">
+                                <span class="column-select-list">
+                                    <ng-select [items]="filterField.options"
+                                        bindLabel="displayName"
+                                        placeholder="Add {{filterField.displayName}}"
+                                        multiple="true"
+                                        [clearable]="false"
+                                        [closeOnSelect]="false"
+                                        [(ngModel)]="filterData">
+                                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/> {{item.value}}
+                                        </ng-template>
+                                        <ng-template ng-header-tmp>
+                                            <input style="width: 100%; line-height: 24px" type="text"/>
+                                        </ng-template>
+                                        <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                                            <span class="ng-value-label"> 
+                                                <a>
+                                                    <span class=""></span> More ...
+                                                </a>
+                                            </span>
+                                        </ng-template>
+                        
+                                    </ng-select>
+                                </span>
+                            </div>
+                          </li>
+
+
                         <li class="toolbar-item">
-                            <a routerLink="/customers/0/edit">
-                                <span class="glyphicon glyphicon-plus"></span> New Candidate
-                            </a>
+                                <div class="toolbar-display-type">
+                                    <span class="column-select-list">
+                                        <ng-select #filtercolumn [items]="allFields"
+                                            bindLabel="displayName"
+                                            placeholder="Add Filter"
+                                            multiple="true"
+                                            [clearable]="false"
+                                            [closeOnSelect]="false"
+                                            [(ngModel)]="selected">
+                                            <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                                <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/> {{item.displayName}}
+                                            </ng-template>
+                                            <ng-template ng-header-tmp>
+                                                <input style="width: 100%; line-height: 24px" type="text" (input)="filtercolumn.filter($event.target.value)"/>
+                                            </ng-template>
+                                            <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                                                <span class="ng-value-label"> 
+                                                    <a>
+                                                        <span class="glyphicon glyphicon-plus"></span> Add Filter
+                                                    </a>
+                                                </span>
+                                            </ng-template>
+                            
+                                        </ng-select>
+                                    </span>
+                                </div>
+
                         </li>
                     </ul>
                     <cm-filter-textbox class="navbar-right"
