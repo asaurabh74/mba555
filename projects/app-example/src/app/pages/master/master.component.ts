@@ -58,6 +58,7 @@ export class MasterComponent implements OnInit, OnDestroy {
   }
 
   getRouteParams(map: ParamMap): number {
+    console.log (" in getRouteParams ");
     const characterId = map.get('id');
     let id: number = null;
     if (characterId) {

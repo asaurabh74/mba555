@@ -22,7 +22,7 @@ export class CustomersComponent implements OnInit {
   displayMode: DisplayModeEnum;
   displayModeEnum = DisplayModeEnum;
   totalRecords = 0;
-  pageSize = 10;
+  pageSize = 20;
   selectedFields: ICandidateField[] =[];
   allFields: ICandidateField[] =[];
 

@@ -79,19 +79,32 @@ function JiraAdminlib() {
     }
 
     this.customFieldNames = [
+        {"name": "ID", "displayName":  "ID", "fieldName": "ID", "editable": false, "type": "number"},
+        {"name": "gender", "displayName":  "Gender", "fieldName": "Gender", "editable": false, "type": "string"},
+        {"name": "GT_ASVAB_SCORE", "displayName":  "GT Score", "fieldName": "GT_ASVAB_SCORE", "editable": false, "type": "number"},
+        {"name": "GM_ASVAB_SCORE", "displayName":  "GM Score", "fieldName": "GM_ASVAB_SCORE", "editable": false, "type": "number"},
+        {"name": "CO_ASVAB_SCORE", "displayName":  "CO Score", "fieldName": "CO_ASVAB_SCORE", "editable": false, "type": "number"},
+        {"name": "ST_ASVAB_SCORE", "displayName":  "ST Score", "fieldName": "ST_ASVAB_SCORE", "editable": false, "type": "number"},
+        {"name": "Installation", "displayName":  "Installation", "fieldName": "INSTALLATION", "editable": false, "type": "string"},
+        {"name": "ASG_ELIG_CD", "displayName":  "ASG_ELIG_CD", "fieldName": "ASG_ELIG_CD", "editable": false, "type": "string"},
+        {"name": "UIC", "displayName":  "UIC", "fieldName": "UIC", "editable": false, "type": "string"},
+        {"name": "UNIT", "displayName":  "UNIT", "fieldName": "UNIT", "editable": false, "type": "string"},
+        {"name": "MIL_ED_LVL_CD(MEL)", "displayName":  "Millitary Education Level", "fieldName": "MIL_ED_LVL_CD(MEL)", "editable": false, "type": "string"},
+        {"name": "SORB INSTALLATION", "displayName":  "SORB Installation", "fieldName": "SORB INSTALLATION", "editable": false, "type": "string"},
+        {"name": "Address", "displayName":  "Address", "fieldName": "Address", "editable": false, "type": "string"},
+        {"name": "Primary email", "displayName":  "Primary email", "fieldName": "Primary email", "editable": false, "type": "string"},
+        {"name": "Secondary email", "displayName":  "Secondary email", "fieldName": "Secondary email", "editable": false, "type": "string"},
+        //{"name": "city", "displayName":  "City", "fieldName": "City", "editable": false, "type": "string"},
+        //{"name": "state", "displayName":  "State", "fieldName": "State", "editable": false, "type": "string"},
+        //{"name": "zip", "displayName":  "Zip", "fieldName": "Zip", "editable": false, "type": "string"},
         {"name": "firstName", "displayName":  "First Name", "fieldName": "First Name", "editable": true, "type": "string"},
         {"name": "lastName", "displayName":  "Last Name",  "fieldName": "Last Name", "editable": true, "type": "string"},
-        {"name": "GT_ASVAB_SCORE", "displayName":  "GT ASVAB Score", "fieldName": "GT_ASVAB_SCORE", "editable": false, "type": "number"},
-        {"name": "city", "displayName":  "City", "fieldName": "City", "editable": false, "type": "string"},
-        {"name": "state", "displayName":  "State", "fieldName": "State", "editable": false, "type": "string"},
-        {"name": "zip", "displayName":  "Zip", "fieldName": "Zip", "editable": false, "type": "string"},
-        {"name": "GM_ASVAB_SCORE", "displayName":  "GM ASVAB Score", "fieldName": "GM_ASVAB_SCORE", "editable": false, "type": "number"},
-        {"name": "ST_ASVAB_SCORE", "displayName":  "ST ASVAB Score", "fieldName": "ST_ASVAB_SCORE", "editable": false, "type": "number"},
-        {"name": "gender", "displayName":  "Gender", "fieldName": "gender", "editable": false, "type": "string"},
         {"name": "qualWomos", "displayName":  "QUAL WOMOS", "fieldName": "QUAL WOMOS", "editable": true, "type": "string"},
         {"name": "primaryWomos", "displayName":  "Primary MOS", "fieldName": "PRIMARY MOS", "editable": true, "type": "string"},
         {"name": "rank", "displayName":  "Rank", "fieldName": "Rank", "editable": true, "type": "select"},
-       {"name": "leadStatus", "displayName":  "Lead Status", "fieldName": "Rank", "editable": true, "type": "select"}
+        {"name": "Distribution Group", "displayName":  "Distribution Group", "fieldName": "Distribution Group", "editable": true, "type": "select"},
+        {"name": "Territory", "displayName":  "Territory", "fieldName": "Territory", "editable": true, "type": "select"},
+        {"name": "Packet Processing Status", "displayName":  "Packet Processing Status", "fieldName": "Packet Processing Status", "editable": true, "type": "select"} 
     ]
     
      this.getCustomFieldNames = () => {
