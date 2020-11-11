@@ -40,7 +40,20 @@ export class CustomersGridComponent implements OnInit {
 
 	isAllCheckBoxChecked() {
 		return this.customers.every(p => p.checked);
-	}
-
-
+  }
+  
+  getData(customer: ICustomer, field :ICandidateField){
+    console.log (customer);
+    if (field.type === 'option' || field.type === 'select') {
+      if (customer[field.name])
+        return customer[field.name].value;
+      return "";
+    } else if (field.type === 'array') {
+      var values = customer[field.name];
+      if (values && values.length > 0) {
+        return values[0].value;
+      }
+    }
+    return customer[field.name] ;
+  } 
 }

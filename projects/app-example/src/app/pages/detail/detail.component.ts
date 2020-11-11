@@ -66,6 +66,7 @@ export class DetailComponent implements OnInit, OnDestroy {
   }
 
   getRouteParams(map: ParamMap): number {
+    console.log (" in getRouteParams ");
     const characterId = map.get('id');
     let id: number = null;
     if (characterId) {
@@ -84,6 +85,16 @@ export class DetailComponent implements OnInit, OnDestroy {
 
   saveData(item: any) {
     console.log("Saved value=", item);
+    // implement a method in data service.ts 
+    // implement a post method in data service ts that sends the data to the server
+    // server code is implemented in js
+    // create a route in server.js to handle the post
+    // you get the object from request
+    // add a method in jiraClient not jira admin  
+    // update the issue using jira client
+    // https://www.npmjs.com/package/jira-connector
+    // use async await 
+    
   }
 
 }
