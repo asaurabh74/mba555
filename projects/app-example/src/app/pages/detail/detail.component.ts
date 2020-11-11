@@ -78,9 +78,7 @@ export class DetailComponent implements OnInit, OnDestroy {
   }
 
   getFieldValue(customField: ICandidateField, customer: ICustomer) {
-    console.log (" Getting value for ", customField, customer);
     var val = (customer && customer[customField.name]);
-    console.log (" Value for  ", customField.name, val )
     return val || "";
   }
 

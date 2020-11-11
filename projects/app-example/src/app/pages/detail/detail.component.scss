@@ -31,16 +31,17 @@
       color: var(--app-color-text-primary);
       font-weight: strong;
       margin-left: 20px;
-      width: 200px;
-      padding: 10px;
+      width: 160px;
+      display: inline-block;
     }
 
     .fieldValue {
       font-size: var(--app-text-size--md);
       color: var(--app-color-text-primary);
       font-weight: normal;
-      width: 200px;
       display: inline-block;
+      width: 250px;
+      padding-left: 20px;
     }
 
     h1 {
