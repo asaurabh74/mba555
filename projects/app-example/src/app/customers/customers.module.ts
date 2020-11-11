@@ -16,6 +16,8 @@ import { AngularSplitModule } from 'angular-split';
 import { EditInputComponent } from '../edit-input/edit-input.component';
 import { AutofocusDirective } from '../shared/directives/autofocus.directive';
 
+import { SearchFilterComponent } from '../search-filter/search-filter.component';
+
 
 
 @NgModule({
@@ -36,7 +38,8 @@ import { AutofocusDirective } from '../shared/directives/autofocus.directive';
     HeaderComponent,
     ListItemComponent,
     EditInputComponent,
-    AutofocusDirective
+    AutofocusDirective,
+    SearchFilterComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

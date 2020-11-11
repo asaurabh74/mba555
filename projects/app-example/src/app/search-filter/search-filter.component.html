@@ -1,0 +1,43 @@
+
+
+<!-- <input *ngIf='isTextEditMode()' (focusout)="onFocusOut()" (keydown.enter)='$event.target.blur()' [(ngModel)]='data' class='cellInput'
+  appAutofocus type='text' (keydown.enter)='$event.target.blur()' (focusout)="editMode=false">
+
+<input *ngIf='isNumberEditMode()' (focusout)="onFocusOut()" (keydown.enter)='$event.target.blur()' [(ngModel)]='data' class='cellInput'
+  appAutofocus type='number' (keydown.enter)='$event.target.blur()' (focusout)="editMode=false">
+
+  <input *ngIf='isNumberEditMode()' (focusout)="onFocusOut()" (keydown.enter)='$event.target.blur()' [(ngModel)]='data' class='cellInput'
+  appAutofocus type='number' (keydown.enter)='$event.target.blur()' (focusout)="editMode=false">
+
+  <select *ngIf='isSelectEditMode()' (focusout)="onFocusOut()" (keydown.enter)='$event.target.blur()' [(ngModel)]='data' class='cellInput'
+  appAutofocus type='number' (keydown.enter)='$event.target.blur()' (focusout)="editMode=false">
+    <option *ngFor="let option of fieldObj.options" [ngValue]="option">{{option.value}}</option>
+  </select> -->
+
+  <span *ngIf='isSelectEditMode()' class="column-select-list">
+    <ng-select [items]="getOptions()"
+        bindLabel="displayName"
+        placeholder="Add {{data.displayName}}"
+        multiple="true"
+        [clearable]="false"
+        [closeOnSelect]="false"
+        [(ngModel)]="filterData">
+        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+            <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/> {{item.value}}
+        </ng-template>
+        <ng-template ng-header-tmp>
+            <input style="width: 100%; line-height: 24px" type="text"/>
+        </ng-template>
+        <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+            <span class="ng-value-label"> 
+                <a>
+                    <span class="search-filter-label"></span> {{data.displayName}} [{{items.length}}]
+                </a>
+            </span>
+        </ng-template>
+    </ng-select>
+</span>
+
+
+
+
