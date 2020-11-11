@@ -1,5 +1,12 @@
 @import '../../../styles/mixins.scss';
 
+.split-gutter { height: initial !important; }
+
+.height-max {
+  height: calc(100vh - 10px);
+  overflow: auto;
+  }
+
 :host {
   display: flex;
   flex-flow: column;
@@ -9,6 +16,7 @@
   .__header {
 
   }
+
 
   .__content {
     flex: 1;
