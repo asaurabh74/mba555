@@ -37,9 +37,8 @@ export class EditInputComponent implements OnInit {
     if ((this.fieldObj.type === "select" || this.fieldObj.type === "option") && this.data && this.data.value) {
       return this.data.value;
     } else if (this.fieldObj.type === 'array') {
-      var values = this.data[this.fieldObj.name];
-      if (values && values.length > 0) {
-        return values[0].value;
+      if (this.data && this.data.length > 0) {
+        return this.data[0].value;
       }
     }
     return this.data;

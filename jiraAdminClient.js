@@ -53,7 +53,8 @@ function JiraAdminlib() {
             if (customField && customField.schema && customField.schema.type) {
                 this.customFieldNames[x].type = customField.schema.type;
             }
-            if (customField && customField.schema && customField.schema.type === 'option') {
+            if (customField && customField.schema 
+                && (customField.schema.type === 'option' ||  customField.schema.type === 'array')) {
                 customField.allowedValues = await this.getAvailableOptions(customField.id);
                 if (customField.allowedValues) {
                     var options = [];
@@ -65,7 +66,7 @@ function JiraAdminlib() {
                     }
                     this.customFieldNames[x].options = options;
                 }
-            }
+            } 
         }
     }
 
