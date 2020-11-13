@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: asaurabhmba 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: asaurabhmba
+  template:
+    metadata:
+      labels:
+        app: asaurabhmba 
+    spec:
+      containers:
+        - name: asaurabhmba 
+          image: arsof.azurecr.io/asaurabhmba
+          ports:
+          - containerPort: 8080
