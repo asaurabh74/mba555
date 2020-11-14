@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import {EditOutput, ICandidateField} from "../shared/interfaces";
+import {EditOutput, ICandidateField, ISearchFilter} from "../shared/interfaces";
 import { NgSelectComponent } from '@ng-select/ng-select';
 
 @Component({
@@ -11,6 +11,7 @@ import { NgSelectComponent } from '@ng-select/ng-select';
 export class SearchFilterComponent implements OnInit {
   @Input() data: ICandidateField;
   @Output() focusOut: EventEmitter<any> = new EventEmitter<string>();
+  @Output() queryChanged: EventEmitter<any> = new EventEmitter<ISearchFilter>();
 
   filterData: any[] =[];
   editMode = false;
@@ -64,10 +65,35 @@ export class SearchFilterComponent implements OnInit {
 
   update(event: Event, select: NgSelectComponent) {
     event.preventDefault();
-    this.minValueOriginal = this.minValue;
-    this.maxValueOriginal = this.maxValue;
+    this.minValueOriginal = this.minValue || 0  ;
+    this.maxValueOriginal = this.maxValue || 0;
+
+    var query = this.getQuery();
+
+    this.queryChanged.emit( {
+      fieldName: this.data.name,
+      query: query
+    });
     select.close();
   }
+
+  getQuery() {
+    var query = "";
+    if (this.isNumberEditMode()) {
+      if (this.minValueOriginal !== 0) {
+        query =  this.data.fieldName  + ">=" + this.minValueOriginal;
+      }
+      if (this.maxValueOriginal != 0) {
+        if (query !== "") {
+          query += " AND "
+        }
+        query  +=  this.data.fieldName  + "<=" + this.maxValueOriginal;
+      }
+    }
+    return query;
+  }
+
+
 
   onFocusOut() {
     this.focusOut.emit({

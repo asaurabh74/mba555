@@ -9,6 +9,7 @@ import { HeaderComponent, ListItemComponent } from '../components';
 import { LibMasterDetailModule } from '../master-detail/public-api';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { charactersReducer } from '../state/character.reducer';
+import { searchReducer } from '../state/search.reducer';
 import { StoreModule } from '@ngrx/store';
 import { CoreModule } from '../core/core.module';
 import { AngularSplitModule } from 'angular-split';
@@ -26,7 +27,7 @@ import { SearchFilterComponent } from '../search-filter/search-filter.component'
             NgSelectModule,
             HttpClientModule,
             LibMasterDetailModule,
-            StoreModule.forRoot({ characters: charactersReducer }),
+            StoreModule.forRoot({ characters: charactersReducer, searchFilters: searchReducer}),
             StoreDevtoolsModule.instrument(),
             CoreModule,
             SharedModule,

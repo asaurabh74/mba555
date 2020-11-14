@@ -2,12 +2,13 @@ import { Component, OnInit, ViewChild,
   ViewContainerRef, ComponentFactoryResolver, ComponentRef } from '@angular/core';
 
 import { DataService } from '../core/services/data.service';
-import { ICustomer, IPagedResults ,ICandidateField} from '../shared/interfaces';
+import { ICustomer, IPagedResults ,ICandidateField, ISearchFilter} from '../shared/interfaces';
 import { FilterService } from '../core/services/filter.service';
 import { LoggerService } from '../core/services/logger.service';
 
 import { Store, select } from '@ngrx/store';
 import { loadCharacters } from '../state/character.actions';
+import { add } from '../state/search.actions';
 
 @Component({
   selector: 'cm-customers',
@@ -28,6 +29,7 @@ export class CustomersComponent implements OnInit {
   filterSelectedFields: ICandidateField[] =[];
 
   filterData: any[] =[];
+  searchFilters = {};
 
 
 
@@ -89,8 +91,27 @@ export class CustomersComponent implements OnInit {
     this.getCustomersPage(page);
   }
 
+  queryChanged(searchFilter: ISearchFilter) {
+    this.searchFilters[searchFilter.fieldName] = searchFilter.query;
+    this.getCustomersPage(1);
+    console.log (" query changed ", this.searchFilters);
+  }
+
+  getQuery() {
+    var query = "";
+    for (var searchFilter in this.searchFilters){
+      if (this.searchFilters[searchFilter] !== "") {
+        if (query.length > 0) {
+          query += " AND ";
+        }
+        query += this.searchFilters[searchFilter];
+      } 
+    }
+    return query;
+  }
+
   getCustomersPage(page: number) {
-    this.dataService.getCustomersPage((page - 1) * this.pageSize, this.pageSize)
+    this.dataService.getCustomersPage((page - 1) * this.pageSize, this.pageSize, this.getQuery())
         .subscribe((response: IPagedResults<ICustomer[]>) => {
           this.customers = this.filteredCustomers = response.results;
           this.totalRecords = response.totalRecords;

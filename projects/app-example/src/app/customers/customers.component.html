@@ -36,6 +36,7 @@
                             <div class="toolbar-display-type">
                                 <app-search-filter
                                     [data]="filterField"
+                                    (queryChanged)="queryChanged($event)"
                                 ></app-search-filter> 
                             </div>
                         </li>

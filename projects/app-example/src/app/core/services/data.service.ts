@@ -17,9 +17,9 @@ export class DataService {
 
     constructor(private http: HttpClient, private utilitiesService: UtilitiesService) {  }
 
-    getCustomersPage(page: number, pageSize: number): Observable<IPagedResults<ICustomer[]>> {
+    getCustomersPage(page: number, pageSize: number, searchFilters: string): Observable<IPagedResults<ICustomer[]>> {
         return this.http.get<ICustomer[]>(
-            `${this.customersBaseUrl}/page/${page}/${pageSize}`,
+            `${this.customersBaseUrl}/page/${page}/${pageSize}?query=${encodeURIComponent(searchFilters)}`,
             { observe: 'response' })
             .pipe(
                 map(res => {

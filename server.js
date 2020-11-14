@@ -85,13 +85,10 @@ app.get('/api/candidate/fields', auth, (req, res) => {
 
 app.get('/api/customers/page/:skip/:top', auth, (req, res) => {
    
-    var jql, 
-        startAt,
-        maxResults;
-
     var jiraClient = getJiraClient(req);
 
     const topVal = req.params.top,
+    jql = req.query? req.query.query : "" || "",
     skipVal = req.params.skip,
     skip = (isNaN(skipVal)) ? 0 : +skipVal;  
     let top = (isNaN(topVal)) ? 10 : skip + (+topVal);

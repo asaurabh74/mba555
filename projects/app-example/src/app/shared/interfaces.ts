@@ -17,6 +17,11 @@ export interface ICustomer {
     checked?: boolean;
 }
 
+export interface ISearchFilter {
+    query: string;
+    fieldName: string;
+}
+
 export interface IFieldOption {
     id: string;
     value: string;
