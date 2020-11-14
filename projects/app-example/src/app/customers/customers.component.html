@@ -13,35 +13,6 @@
             <div class="col-md-10">
                 <div class="navbar">
                     <ul class="nav navbar-nav">
-                        <li class="toolbar-item">
-                            <div class="toolbar-display-type">
-                            <ng-select
-                                    [items]="displayTypes"
-                                    [multiple]="false"
-                                    bindLabel="type"
-                                    [clearable]="false"
-                                    bindValue="id"
-                                    [(ngModel)]="displayMode">
-
-                                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
-                                        <span class="ng-value-label"> 
-                                            <a>
-                                                <span class="{{item.iconClass}}"></span> {{item.type}}
-                                            </a>
-                                        </span>
-                                    </ng-template>
-
-                                    <ng-template ng-option-tmp let-item="item">
-                                        <span class="ng-value-label">
-                                            <a (click)="changeDisplayMode(item.id)" [class.active]="displayMode === item.id">
-                                                <span class="{{item.iconClass}}"></span> {{item.type}}
-                                            </a>
-                                        </span>
-                                    </ng-template>
-                            </ng-select>
-                        </div>
-                        </li>
-
                           <!-- <li class="toolbar-item">
                             <div class="toolbar-search-item">
                                 <ng-select #select [items]="players"
@@ -103,6 +74,33 @@
                     <cm-filter-textbox class="navbar-right"
                      (changed)="filterChanged($event)"></cm-filter-textbox>
                 </div>
+                <div class="toolbar-display-type navbar-right display-type">
+                    <ng-select
+                            [items]="displayTypes"
+                            [multiple]="false"
+                            bindLabel="type"
+                            [clearable]="false"
+                            bindValue="id"
+                            [(ngModel)]="displayMode">
+
+                            <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                <span class="ng-value-label"> 
+                                    <a>
+                                        <span class="{{item.iconClass}}"></span> {{item.type}}
+                                    </a>
+                                </span>
+                            </ng-template>
+
+                            <ng-template ng-option-tmp let-item="item">
+                                <span class="ng-value-label">
+                                    <a (click)="changeDisplayMode(item.id)" [class.active]="displayMode === item.id">
+                                        <span class="{{item.iconClass}}"></span> {{item.type}}
+                                    </a>
+                                </span>
+                            </ng-template>
+                    </ng-select>
+                </div>
+
             </div>
         </div>
         

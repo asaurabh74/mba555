@@ -14,7 +14,7 @@
     <option *ngFor="let option of fieldObj.options" [ngValue]="option">{{option.value}}</option>
   </select> -->
 
-  <span *ngIf='isSelectEditMode()' class="column-select-list">
+  <span *ngIf='isSelectEditMode()' class="column-select-list field-filter">
     <ng-select [items]="getOptions()"
         bindLabel="displayName"
         placeholder="{{data.displayName}}"
