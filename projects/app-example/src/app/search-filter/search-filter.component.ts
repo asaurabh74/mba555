@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {EditOutput, ICandidateField} from "../shared/interfaces";
+import { NgSelectComponent } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-search-filter',
@@ -12,8 +13,11 @@ export class SearchFilterComponent implements OnInit {
   @Output() focusOut: EventEmitter<any> = new EventEmitter<string>();
 
   filterData: any[] =[];
- 
   editMode = false;
+  minValue: number;
+  maxValue: number;
+  minValueOriginal: number;
+  maxValueOriginal: number;
 
   constructor() {}
 
@@ -49,6 +53,20 @@ export class SearchFilterComponent implements OnInit {
     //   }
     // }
     return this.data;
+  }
+
+  cancel(event: Event, select: NgSelectComponent) {
+    event.preventDefault();
+    this.minValue=this.minValueOriginal;
+    this.maxValue=this.maxValueOriginal;
+    select.close();
+  }
+
+  update(event: Event, select: NgSelectComponent) {
+    event.preventDefault();
+    this.minValueOriginal = this.minValue;
+    this.maxValueOriginal = this.maxValue;
+    select.close();
   }
 
   onFocusOut() {

@@ -18,6 +18,10 @@
 .display-type {
     margin-right:0px !important;
 }
+
+.hide-no-content-panel .ng-dropdown-panel .scroll-host {
+    display: none;
+}
   
 
 .col-md-10 {

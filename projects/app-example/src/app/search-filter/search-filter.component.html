@@ -14,8 +14,43 @@
     <option *ngFor="let option of fieldObj.options" [ngValue]="option">{{option.value}}</option>
   </select> -->
 
+  <span *ngIf='isNumberEditMode()' class="column-select-list field-filter hide-no-content-panel">
+    <ng-select [items]="getOptions()" #select
+        bindLabel="displayName"
+        placeholder="{{data.displayName}}"
+        multiple="false"
+        [clearable]="false"
+        [closeOnSelect]="false"
+        [(ngModel)]="filterData">
+        <ng-template ng-header-tmp>
+            <div>
+                <span>Min: </span>
+                <input style="width: 100%; line-height: 24px" type="number" [(ngModel)]="minValue" />
+            </div>
+            <div>
+                <span>Max: </span>
+                <input style="width: 100%; line-height: 24px" type="number" [(ngModel)]="maxValue"/>
+            </div>
+           
+        </ng-template>
+        <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+            <span class="ng-value-label"> 
+                <a>
+                    <span class="search-filter-label"></span> {{data.displayName}} [{{items.length}}]
+                </a>
+            </span>
+        </ng-template>
+         <ng-template ng-footer-tmp>
+            <div class="pull-right search-button-bar">
+                <button class="btn btn-default" (click)="cancel($event, select)">Cancel</button>&nbsp;&nbsp;
+                <button type="submit" class="btn btn-success" (click)="update($event, select)">Update</button>
+              </div>
+        </ng-template>
+    </ng-select>
+</span>
+
   <span *ngIf='isSelectEditMode()' class="column-select-list field-filter">
-    <ng-select [items]="getOptions()"
+    <ng-select [items]="getOptions()" #filtercolumn
         bindLabel="displayName"
         placeholder="{{data.displayName}}"
         multiple="true"
@@ -26,7 +61,7 @@
             <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/> {{item.value}}
         </ng-template>
         <ng-template ng-header-tmp>
-            <input style="width: 100%; line-height: 24px" type="text"/>
+            <input style="width: 100%; line-height: 24px" type="text" (input)="filtercolumn.filter($event.target.value)" />
         </ng-template>
         <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
             <span class="ng-value-label"> 
