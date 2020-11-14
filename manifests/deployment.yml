@@ -17,3 +17,13 @@ spec:
           image: arsof.azurecr.io/asaurabhmba
           ports:
           - containerPort: 8080
+          envFrom:
+          - secretRef:
+              name: jira-config
+          volumeMounts:
+          - mountPath: /etc/jira-ssh-keys
+            name: secret-volume
+      volumes:
+        - name: secret-volume
+          secret:
+            secretName: jira-key-secret

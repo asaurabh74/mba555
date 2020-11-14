@@ -17,7 +17,7 @@
   <span *ngIf='isSelectEditMode()' class="column-select-list">
     <ng-select [items]="getOptions()"
         bindLabel="displayName"
-        placeholder="Add {{data.displayName}}"
+        placeholder="{{data.displayName}}"
         multiple="true"
         [clearable]="false"
         [closeOnSelect]="false"
