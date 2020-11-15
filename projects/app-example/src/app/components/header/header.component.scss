@@ -7,7 +7,7 @@
   top: 0;
   z-index: 1;
   padding-top: var(--app-spacing--md);
-  @include app-blur-backdrop();
+  //@include app-blur-backdrop();
 
   .__back {
 
