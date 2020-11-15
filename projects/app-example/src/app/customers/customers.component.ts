@@ -42,9 +42,7 @@ export class CustomersComponent implements OnInit {
   ]
 
   
-  selected = [
-    
-  ];
+  selected = [];
 
   mapComponentRef: ComponentRef<any>;
   _filteredCustomers: ICustomer[] = [];
