@@ -21,10 +21,10 @@ const routes: Routes = [
       children: [
         // Mobile 'Detail' Routes
         // are children of the master...
-        {
-          path: '',
-          redirectTo: 'detail'
-        },
+        // {
+        //   path: '',
+        //   redirectTo: 'detail'
+        // },
         {
           path: 'detail',
           component: DetailComponent
