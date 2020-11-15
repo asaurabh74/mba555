@@ -19,6 +19,8 @@ export class SearchFilterComponent implements OnInit {
   maxValue: number;
   minValueOriginal: number;
   maxValueOriginal: number;
+  textValue: string;
+  originalTextValue: string;
 
   constructor() {}
 
@@ -65,8 +67,27 @@ export class SearchFilterComponent implements OnInit {
 
   update(event: Event, select: NgSelectComponent) {
     event.preventDefault();
-    this.minValueOriginal = this.minValue || 0  ;
+    this.minValueOriginal = this.minValue || 0;
     this.maxValueOriginal = this.maxValue || 0;
+
+    var query = this.getQuery();
+
+    this.queryChanged.emit( {
+      fieldName: this.data.name,
+      query: query
+    });
+    select.close();
+  }
+
+  cancelTextEdit(event: Event, select: NgSelectComponent) {
+    event.preventDefault();
+    this.textValue =this.originalTextValue || "";
+    select.close();
+  }
+
+  updateTextEdit(event: Event, select: NgSelectComponent) {
+    event.preventDefault();
+    this.originalTextValue  = this.textValue || "";
 
     var query = this.getQuery();
 
@@ -89,8 +110,31 @@ export class SearchFilterComponent implements OnInit {
         }
         query  +=  this.data.fieldName  + "<=" + this.maxValueOriginal;
       }
+    } if (this.isTextEditMode() && this.originalTextValue && this.originalTextValue != "") {
+      query = `"${this.data.fieldName}" ~ "${this.originalTextValue}"`
     }
     return query;
+  }
+
+  selectChanged(e) { // here e is a boolean, true if checked, otherwise false
+
+    var query = "";
+    if (this.filterData.length > 0){
+      query = `"${this.data.name}" in (`
+      var queryElem = "";
+      for (var x=0; x< this.filterData.length ; ++x) {
+       if (queryElem !== '') {
+        queryElem += ",";
+       }
+       queryElem += this.filterData[x].value;
+      }
+      query+= queryElem + ")";
+
+    }
+    this.queryChanged.emit( {
+      fieldName: this.data.name,
+      query: query
+    });
   }
 
 
