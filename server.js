@@ -93,15 +93,14 @@ app.get('/api/customers/page/:skip/:top', auth, (req, res) => {
     skip = (isNaN(skipVal)) ? 0 : +skipVal;  
     let top = (isNaN(topVal)) ? 10 : skip + (+topVal);
 
-    if (top > 51) {
-        top = skip + (51 - skip);
-    }
-
-    console.log(`Skip: ${skip} Top: ${top}`);
-
     jiraClient.getCandidates(jql, skip, top-skip).then(pagedCustomers=>{
-        res.setHeader('X-InlineCount', 51);
-        res.json(pagedCustomers);
+        
+        if (top > pagedCustomers.totalResults) {
+            top = skip + (pagedCustomers.totalResults - skip);
+        }
+        console.log(`Skip: ${skip} Top: ${top}`);
+        res.setHeader('X-InlineCount', pagedCustomers.totalResults);
+        res.json(pagedCustomers.candidates);
 
     }).catch(error=>{
         console.log(error);

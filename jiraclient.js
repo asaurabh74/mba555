@@ -60,7 +60,12 @@ function Jiralib(opts, adminClient) {
            maxResults : maxResults || 50,
        });
        var candidates = [];
+       var retVal = {
+           totalResults: 0,
+           candidates: candidates
+       }
        if (result && result.issues) {
+           retVal.totalResults = result.total;
            for (var x=0;x< result.issues.length; ++x) {
             var issue = result.issues[x];
             var fields = issue.fields;
@@ -89,9 +94,11 @@ function Jiralib(opts, adminClient) {
             candidate.gender = candidate.gender || "Male";
             candidates.push(candidate);
            }
+
         
        }
-       return candidates;
+       
+       return retVal;
     }
     
     this.selectedFieldNames = ["firstName", "lastName", "address", "GT_ASVAB_SCORE", "city", "state", "zip"];
