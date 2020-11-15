@@ -23,16 +23,10 @@ function Jiralib(opts, adminClient) {
         }
     }
 
-    // this.customFieldNames = {firstName:"First Name", 
-    //                          lastName:"Last Name", 
-    //                          address: "Address",
-    //                          GT_ASVAB_SCORE: "GT_ASVAB_SCORE", 
-    //                          city: "City",
-    //                          state: "State",
-    //                          zip: "Zip",
-    //                          GM_ASVAB_SCORE: "GM_ASVAB_SCORE", 
-    //                          ST_ASVAB_SCORE: "ST_ASVAB_SCORE", 
-    //                          gender: "gender"};
+
+   this.getLoggedInUser = async () => {
+        return await this.client.auth.currentUser();
+   }
  
     this.getCandidates = async (jql, startAt, maxResults) => {
         var customFields = [
@@ -76,8 +70,10 @@ function Jiralib(opts, adminClient) {
                 status: fields.status.name,
                 reporterName: fields.reporter.displayName,
                 reporterEmail: fields.reporter.emailAddress,
-                assigneeName: fields.assignee ? fields.assignee.displayName : "",
-                assigneeEmail: fields.assignee ? fields.assignee.emailAddress : ""
+                assignee: {
+                    id: fields.assignee ? fields.assignee.accountId : "",
+                    value: fields.assignee ? fields.assignee.displayName : ""
+                }
             };
 
             for (var y=0; y<customFieldNames.length; ++y) {
@@ -86,12 +82,8 @@ function Jiralib(opts, adminClient) {
                     candidate[customFieldNames[y].name] = fields[customField.id];
                  }
             }
-            // var state = {
-            //     "abbreviation": candidate.state,
-            //     "name": candidate.state,
-            // }
-            // candidate.state = state;
             candidate.gender = candidate.gender || "Male";
+            candidate.checked = false;
             candidates.push(candidate);
            }
 

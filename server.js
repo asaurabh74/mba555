@@ -1,4 +1,7 @@
 "use strict";
+
+const { APP_ID } = require('@angular/core');
+
 var express     = require('express'),
     session     = require ('express-session'),
     bodyParser  = require('body-parser'),
@@ -81,6 +84,11 @@ app.get('/api/admin/fields', auth, (req, res) => {
 app.get('/api/candidate/fields', auth, (req, res) => {
     var jiraClient = getJiraClient(req);
     res.json(jiraClient.getSelectedFieldNames());
+});
+
+app.get('/api/auth/currentUser', auth, (req, res) => {
+    var jiraClient = getJiraClient(req);
+    res.json(jiraClient.getLoggedInUser());
 });
 
 app.get('/api/customers/page/:skip/:top', auth, (req, res) => {

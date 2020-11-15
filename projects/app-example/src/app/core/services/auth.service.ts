@@ -33,16 +33,28 @@ export class AuthService {
     //         );
     // }
 
+    getCurrentUser() {
+        return this.http.get<boolean>(this.authUrl + '/currentUser')
+        .pipe(
+            map(user => {
+                return user;
+            }),
+            catchError(this.handleError)
+        );
+
+      }
+
     isLoggedIn(): Observable<boolean> {
         return this.http.get<boolean>(this.authUrl + '/isLoggedIn')
-            .pipe(
-                map(loggedIn => {
-                    this.isAuthenticated = loggedIn;
-                    this.userAuthChanged(loggedIn);
-                    return loggedIn;
-                }),
-                catchError(this.handleError)
-            );
+        .pipe(
+            map(loggedIn => {
+                this.isAuthenticated = loggedIn;
+                this.userAuthChanged(loggedIn);
+                return loggedIn;
+            }),
+            catchError(this.handleError)
+        );
+
     }
 
     logout(): Observable<boolean> {

@@ -120,7 +120,7 @@ export class SearchFilterComponent implements OnInit {
 
     var query = "";
     if (this.filterData.length > 0){
-      query = `"${this.data.name}" in (`
+      query = `"${this.data.fieldName}" in (`
       var queryElem = "";
       for (var x=0; x< this.filterData.length ; ++x) {
        if (queryElem !== '') {

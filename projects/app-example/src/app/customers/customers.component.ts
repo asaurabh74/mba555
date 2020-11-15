@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild,
   ViewContainerRef, ComponentFactoryResolver, ComponentRef } from '@angular/core';
 
 import { DataService } from '../core/services/data.service';
+import { AuthService } from '../core/services/auth.service';
 import { ICustomer, IPagedResults ,ICandidateField, ISearchFilter} from '../shared/interfaces';
 import { FilterService } from '../core/services/filter.service';
 import { LoggerService } from '../core/services/logger.service';
@@ -9,6 +10,7 @@ import { LoggerService } from '../core/services/logger.service';
 import { Store, select } from '@ngrx/store';
 import { loadCharacters } from '../state/character.actions';
 import { add } from '../state/search.actions';
+import { Auth } from 'jira-connector/types/api';
 
 @Component({
   selector: 'cm-customers',
@@ -31,26 +33,17 @@ export class CustomersComponent implements OnInit {
   filterData: any[] =[];
   searchFilters = {};
   currentPage = 1;
-
+  currentUser: any;
 
 
   displayTypes = [
     {id: 0, iconClass: "glyphicon glyphicon-th-large", type: "Card View"},
     {id: 1, iconClass: "glyphicon glyphicon-align-justify", type: "List View"}
   ]
-  /*{id: 2, iconClass: "glyphicon glyphicon-map-marker", type: "Map View"},*/
+
   
-  players = [
-    {id: 1, playerName: 'Connecticut'},
-    {id: 2, playerName: 'New York'},
-    {id: 3, playerName: 'California'},
-    {id: 4, playerName: 'Arizona'},
-    {id: 5, playerName: 'Florida', disabled: true},
-    {id: 6, playerName: 'Georgia'},
-    {id: 7, playerName: 'Texas'},
-  ];
   selected = [
-    //{id: 2, playerName: 'Georgia'}
+    
   ];
 
   mapComponentRef: ComponentRef<any>;
@@ -70,6 +63,7 @@ export class CustomersComponent implements OnInit {
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
     private dataService: DataService,
+    private authService: AuthService,
     private filterService: FilterService,
     private logger: LoggerService,
     public store: Store<any>) { }
@@ -79,6 +73,7 @@ export class CustomersComponent implements OnInit {
     this.filterText = 'Filter Customers:';
     this.displayMode = DisplayModeEnum.Grid;
 
+    this.getCurrentUser();
     this.getCustomersPage(1);
     this.getSelectedFields();
     this.getCandidateFields();
@@ -111,6 +106,15 @@ export class CustomersComponent implements OnInit {
       } 
     }
     return query;
+  }
+
+  getCurrentUser() {
+    this.authService.getCurrentUser()
+        .subscribe((response: any) => {
+          this.currentUser  = response;
+        },
+        (err: any) => this.logger.log(err),
+        () => this.logger.log('getCurrentUser() retrieved for customer'));
   }
 
   getCustomersPage(page: number) {
