@@ -126,7 +126,7 @@ export class SearchFilterComponent implements OnInit {
        if (queryElem !== '') {
         queryElem += ",";
        }
-       queryElem += this.filterData[x].value;
+       queryElem += `"${this.filterData[x].value}"`;
       }
       query+= queryElem + ")";
 
