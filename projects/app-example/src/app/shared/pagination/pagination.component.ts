@@ -47,6 +47,7 @@ export class PaginationComponent implements OnInit {
 
   update() {
     if (this.pagerTotalItems && this.pagerPageSize) {
+      this.pages = [];
       this.totalPages = Math.ceil(this.pagerTotalItems / this.pageSize);
       this.isVisible = true;
       if (this.totalItems >= this.pageSize) {
