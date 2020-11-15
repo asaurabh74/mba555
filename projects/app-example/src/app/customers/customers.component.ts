@@ -30,6 +30,7 @@ export class CustomersComponent implements OnInit {
 
   filterData: any[] =[];
   searchFilters = {};
+  currentPage = 1;
 
 
 
@@ -88,12 +89,14 @@ export class CustomersComponent implements OnInit {
   }
 
   pageChanged(page: number) {
+    this.currentPage = page;
     this.getCustomersPage(page);
   }
 
   queryChanged(searchFilter: ISearchFilter) {
+    this.currentPage = 1;
     this.searchFilters[searchFilter.fieldName] = searchFilter.query;
-    this.getCustomersPage(1);
+    this.getCustomersPage(this.currentPage);
     console.log (" query changed ", this.searchFilters);
   }
 

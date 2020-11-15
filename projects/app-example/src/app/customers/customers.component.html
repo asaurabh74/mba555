@@ -143,6 +143,7 @@
         </cm-map>  -->
 
         <cm-pagination
+            [currentPage]="currentPage"
             [totalItems]="totalRecords" 
             [pageSize]="pageSize" 
             (pageChanged)="pageChanged($event)"></cm-pagination>

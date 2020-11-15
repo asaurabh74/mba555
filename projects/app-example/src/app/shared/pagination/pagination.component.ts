@@ -10,10 +10,11 @@ export class PaginationComponent implements OnInit {
 
   private pagerTotalItems: number;
   private pagerPageSize: number;
-
+ 
   totalPages: number;
   pages: number[] = [];
-  currentPage = 1;
+
+  @Input() currentPage: number;
   isVisible = false;
   previousEnabled = false;
   nextEnabled = true;
