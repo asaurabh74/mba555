@@ -43,7 +43,7 @@ export class EditInputComponent implements OnInit {
     return this.editMode && this.fieldObj  && (this.fieldObj.type === "select" || this.fieldObj.type === "option" || this.fieldObj.type === 'array');
   }
 
-  getData() {
+  _getData() {
     if ((this.fieldObj.type === "select" || this.fieldObj.type === "option") && this.data && this.data.value) {
       if (this.selectData) 
         return this.selectData.value;
@@ -56,6 +56,14 @@ export class EditInputComponent implements OnInit {
       }
     }
     return this.data;
+  }
+
+  getData() {
+    var retVal = this._getData();
+    if (!retVal || retVal === "") {
+      retVal = "<<Enter Value>>";
+    }
+    return retVal;
   }
 
   onFocusOut() {
