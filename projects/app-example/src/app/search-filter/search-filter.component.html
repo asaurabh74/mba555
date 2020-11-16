@@ -75,7 +75,7 @@
 </span>
 
   <span *ngIf='isSelectEditMode()' class="column-select-list field-filter">
-    <ng-select [items]="data.options" #filtercolumn
+    <ng-select [items]="getOptions()" #filtercolumn
         bindLabel="displayName"
         placeholder="{{data.displayName}}"
         multiple="true"

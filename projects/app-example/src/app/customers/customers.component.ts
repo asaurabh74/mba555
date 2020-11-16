@@ -152,20 +152,12 @@ export class CustomersComponent implements OnInit {
     this.dataService.getCandidateFields()
         .subscribe((response: ICandidateField []) => {
           this.allFields  = response;
-          // add the recruiter field by default
-          // var assigneeFieldIndex = -1;
            for (var x=0; x< this.allFields.length; ++x) {
              if (this.allFields[x].fieldName === "assignee") {
                  var aField = this.allFields[x];
                  this.searchSelectedItem.options = aField.options;
-          //     console.log ("A field" ,aField);
-          //     this.searchSelected.push(aField);
              }
            }
-          // if (assigneeFieldIndex !== -1) {
-          //   delete this.allFields[assigneeFieldIndex];
-          // }
-
         },
         (err: any) => this.logger.log(err),
         () => this.logger.log('getCandidateFields() retrieved '));

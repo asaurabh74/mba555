@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {EditOutput, ICandidateField, ISearchFilter} from "../shared/interfaces";
 import { NgSelectComponent } from '@ng-select/ng-select';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-search-filter',
@@ -13,7 +14,7 @@ export class SearchFilterComponent implements OnInit {
   @Output() focusOut: EventEmitter<any> = new EventEmitter<string>();
   @Output() queryChanged: EventEmitter<any> = new EventEmitter<ISearchFilter>();
 
-  filterData: any[] =[];
+  filterData = [];
   editMode = false;
   minValue: number;
   maxValue: number;
@@ -25,13 +26,6 @@ export class SearchFilterComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    console.log("data =", this.data);
-    // if (this.data.fieldName === 'assignee'){
-    //   this.filterData.push({
-    //       id: "currentUser()",
-    //       value: "Current User"
-    //   })
-    // }
   }
 
   isTextEditMode() {
@@ -105,6 +99,11 @@ export class SearchFilterComponent implements OnInit {
     });
     select.close();
   }
+
+  customSearchFn(term: string, item: any) {
+    term = term.toLocaleLowerCase();
+    return item.id.toLocaleLowerCase().indexOf(term) > -1 || item.value.toLocaleLowerCase().indexOf(term) > -1;
+   }
 
   getQuery() {
     var query = "";
