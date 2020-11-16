@@ -69,8 +69,7 @@ function JiraAdminlib() {
                     if (user.accountType === "atlassian" && user.active) {
                         options.push({
                             id: user.accountId,
-                            value: user.displayName,
-                            email: user.emailAddress
+                            value: user.displayName
                         });
                     }
                 }

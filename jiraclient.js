@@ -25,7 +25,8 @@ function Jiralib(opts, adminClient) {
 
 
    this.getLoggedInUser = async () => {
-        return await this.client.auth.currentUser();
+        var user =  await this.client.auth.currentUser();
+        return user;
    }
  
     this.getCandidates = async (jql, startAt, maxResults) => {
@@ -93,7 +94,7 @@ function Jiralib(opts, adminClient) {
        return retVal;
     }
     
-    this.selectedFieldNames = ["firstName", "lastName", "address", "GT_ASVAB_SCORE", "city", "state", "zip"];
+    this.selectedFieldNames = ["firstName", "lastName", "address", "GT_ASVAB_SCORE", "city", "state", "zip", "assignee", "rank"];
 
     this.getSelectedFieldNames = () => {
         var customFieldNames = this.adminClient.getCustomFieldNames();

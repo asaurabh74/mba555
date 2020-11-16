@@ -24,7 +24,9 @@ export class SearchFilterComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log("data =", this.data);
+  }
 
   isTextEditMode() {
       return this.data  && this.data.type === "string";

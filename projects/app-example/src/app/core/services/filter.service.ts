@@ -19,8 +19,14 @@ export class FilterService {
                    }
                    continue;
                 }
-
-                if (item[prop] && item[prop].toString().toUpperCase().indexOf(data) > -1) {
+                var itemProp = item[prop];
+                if (Array.isArray(itemProp) && itemProp.length > 0) {
+                    itemProp = itemProp[0];
+                }
+                if (itemProp && itemProp.value !== "") {
+                    itemProp = itemProp.value;
+                }
+                if (itemProp && itemProp.toString().toUpperCase().indexOf(data) > -1) {
                   match = true;
                   break;
                 }

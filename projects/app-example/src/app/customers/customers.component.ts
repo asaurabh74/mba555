@@ -110,6 +110,7 @@ export class CustomersComponent implements OnInit {
     this.authService.getCurrentUser()
         .subscribe((response: any) => {
           this.currentUser  = response;
+          console.log (" current user =", this.currentUser);
         },
         (err: any) => this.logger.log(err),
         () => this.logger.log('getCurrentUser() retrieved for customer'));
@@ -142,6 +143,18 @@ export class CustomersComponent implements OnInit {
     this.dataService.getCandidateFields()
         .subscribe((response: ICandidateField []) => {
           this.allFields  = response;
+          // add the recruiter field by default
+          // var assigneeFieldIndex = -1;
+          for (var x=0; x< this.allFields.length; ++x) {
+            if (this.allFields[x].fieldName === "assignee") {
+            //  assigneeFieldIndex = x;
+              this.selected.push(this.allFields[x]);
+            }
+          }
+          // if (assigneeFieldIndex !== -1) {
+          //   delete this.allFields[assigneeFieldIndex];
+          // }
+
         },
         (err: any) => this.logger.log(err),
         () => this.logger.log('getCandidateFields() retrieved '));
@@ -150,7 +163,10 @@ export class CustomersComponent implements OnInit {
   filterChanged(data: string) {
     if (data && this.customers) {
         data = data.toUpperCase();
-        const props = ['firstName', 'lastName', 'city', 'state', 'summary'];
+        var props = [];
+        for (var x=0; x< this.allFields.length; ++x) {
+          props.push(this.allFields[x].name);
+        }
         this.filteredCustomers = this.filterService.filter<ICustomer>(this.customers, data, props);
     } else {
       this.filteredCustomers = this.customers;
