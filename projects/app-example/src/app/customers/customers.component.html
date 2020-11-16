@@ -32,7 +32,7 @@
                             </div>
                         </li> -->
 
-                        <li *ngFor="let filterField of selected">
+                        <li *ngFor="let filterField of searchSelected">
                             <div class="toolbar-display-type">
                                 <app-search-filter
                                     [data]="filterField"
@@ -51,7 +51,7 @@
                                             multiple="true"
                                             [clearable]="false"
                                             [closeOnSelect]="false"
-                                            [(ngModel)]="selected">
+                                            [(ngModel)]="searchSelected">
                                             <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
                                                 <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected"/> {{item.displayName}}
                                             </ng-template>
@@ -59,17 +59,17 @@
                                                 <input style="width: 100%; line-height: 24px" type="text" (input)="filtercolumn.filter($event.target.value)"/>
                                             </ng-template>
                                             <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
-                                                <span class="ng-value-label"> 
+                                              <span class="ng-value-label"> 
                                                     <a>
                                                         <span class="glyphicon glyphicon-plus"></span> Add Filter
                                                     </a>
-                                                </span>
+                                                </span> 
+                                            
                                             </ng-template>
                             
                                         </ng-select>
                                     </span>
                                 </div>
-
                         </li>
                     </ul>
                     <cm-filter-textbox class="navbar-right"

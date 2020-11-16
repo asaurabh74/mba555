@@ -6,7 +6,7 @@ import { AuthService } from '../core/services/auth.service';
 import { ICustomer, IPagedResults ,ICandidateField, ISearchFilter} from '../shared/interfaces';
 import { FilterService } from '../core/services/filter.service';
 import { LoggerService } from '../core/services/logger.service';
-
+import { of } from 'rxjs'; 
 import { Store, select } from '@ngrx/store';
 import { loadCharacters } from '../state/character.actions';
 import { add } from '../state/search.actions';
@@ -29,6 +29,13 @@ export class CustomersComponent implements OnInit {
   selectedFields: ICandidateField[] =[];
   allFields: ICandidateField[] =[];
   filterSelectedFields: ICandidateField[] =[];
+ // searchSelected: ICandidateField[] =[];
+
+  searchSelectedItem = {displayName: "Recruiter", editable: false, fieldName: "assignee", name: "assignee", options:[], type: "select"};
+  searchSelected = [ this.searchSelectedItem ];
+  searchSelected$ = of(this.searchSelected);
+
+  
 
   filterData: any[] =[];
   searchFilters = {};
@@ -42,7 +49,7 @@ export class CustomersComponent implements OnInit {
   ]
 
   
-  selected = [];
+  
 
   mapComponentRef: ComponentRef<any>;
   _filteredCustomers: ICustomer[] = [];
@@ -73,7 +80,7 @@ export class CustomersComponent implements OnInit {
 
     this.searchFilters["assignee"] = "assignee in (currentUser())"
 
-    this.getCurrentUser();
+    //this.getCurrentUser();
     this.getCustomersPage(1);
     this.getSelectedFields();
     this.getCandidateFields();
@@ -147,12 +154,14 @@ export class CustomersComponent implements OnInit {
           this.allFields  = response;
           // add the recruiter field by default
           // var assigneeFieldIndex = -1;
-          for (var x=0; x< this.allFields.length; ++x) {
-            if (this.allFields[x].fieldName === "assignee") {
-            //  assigneeFieldIndex = x;
-              this.selected.push(this.allFields[x]);
-            }
-          }
+           for (var x=0; x< this.allFields.length; ++x) {
+             if (this.allFields[x].fieldName === "assignee") {
+                 var aField = this.allFields[x];
+                 this.searchSelectedItem.options = aField.options;
+          //     console.log ("A field" ,aField);
+          //     this.searchSelected.push(aField);
+             }
+           }
           // if (assigneeFieldIndex !== -1) {
           //   delete this.allFields[assigneeFieldIndex];
           // }

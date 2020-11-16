@@ -54,6 +54,7 @@ export interface ICandidateField {
     editable: boolean;
     type: string;
     options?: IFieldOption[];
+    selected?: boolean;
 }
 
 

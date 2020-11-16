@@ -40,7 +40,7 @@
                     <thead>
                         <tr>
                             <th><input type="checkbox" [checked]="isAllCheckBoxChecked()" (change)="checkAllCheckBox($event)"></th>
-                            <th *ngFor="let field of fields;">
+                            <th *ngFor="let field of fields;" cmSortBy="{{ field.name }}" (sorted)="sort($event)">
                                     {{field.displayName}}
                             </th>
 
