@@ -62,6 +62,10 @@ function JiraAdminlib() {
                 console.log("assignee");
                 this.customFieldNames[x].type = "select";
                 var options = [];
+                options.push({
+                    id: "currentUser()",
+                    value: "Current User"
+                })
                 this.customFieldNames[x].options = options;
                 var users = await this.getUsers();
                 for (var u=0; u < users.length; ++u) {

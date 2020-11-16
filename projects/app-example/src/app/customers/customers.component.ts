@@ -71,6 +71,8 @@ export class CustomersComponent implements OnInit {
     this.filterText = 'Filter Customers:';
     this.displayMode = DisplayModeEnum.Grid;
 
+    this.searchFilters["assignee"] = "assignee in (currentUser())"
+
     this.getCurrentUser();
     this.getCustomersPage(1);
     this.getSelectedFields();

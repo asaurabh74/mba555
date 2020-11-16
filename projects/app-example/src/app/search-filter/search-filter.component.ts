@@ -26,6 +26,12 @@ export class SearchFilterComponent implements OnInit {
 
   ngOnInit() {
     console.log("data =", this.data);
+    // if (this.data.fieldName === 'assignee'){
+    //   this.filterData.push({
+    //       id: "currentUser()",
+    //       value: "Current User"
+    //   })
+    // }
   }
 
   isTextEditMode() {
@@ -128,7 +134,15 @@ export class SearchFilterComponent implements OnInit {
        if (queryElem !== '') {
         queryElem += ",";
        }
-       queryElem += `"${this.filterData[x].value}"`;
+       if (this.data.fieldName === 'assignee'){
+         if (this.filterData[x].id === "currentUser()") {
+          queryElem += `${this.filterData[x].id}`;
+         } else {
+          queryElem += `"${this.filterData[x].id}"`;
+         }
+       } else {
+        queryElem += `"${this.filterData[x].value}"`;
+       }
       }
       query+= queryElem + ")";
 
