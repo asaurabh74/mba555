@@ -83,6 +83,16 @@ export class DetailComponent implements OnInit, OnDestroy {
     return val || "";
   }
 
+  getReadFieldValue(customField: ICandidateField, customer: ICustomer) {
+    var val = (customer && customer[customField.name]);
+    if (Array.isArray(val) && val.length >0) {
+      val = val[0].value;
+    } else if (val && val.value) {
+      val = val.value;
+    }
+    return val || "";
+  }
+
   saveData(item: any) {
     console.log("Saved value=", item);
     // implement a method in data service.ts 

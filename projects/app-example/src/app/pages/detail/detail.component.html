@@ -36,7 +36,7 @@
           <div *ngFor="let customField of readFields;">
             <div class="readRow">
               <span class="fieldLabel">{{ customField.displayName }}:</span>
-              <span class="fieldValue">{{ getFieldValue(customField, (character$ | async)) }}</span>
+              <span class="fieldValue">{{ getReadFieldValue(customField, (character$ | async)) }}</span>
             </div>
           </div>
         </as-split-area>
