@@ -56,7 +56,8 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let customer of customers;let i=index;trackBy:trackbyService.customer">
-                            <td><input type="checkbox" value="{{customer.id}}" [(ngModel)]="customers[i].checked"></td>
+                            <!-- <td><input type="checkbox" value="{{customer.id}}" [(ngModel)]="customers[i].checked"></td> -->
+                            <td><input type="checkbox" [checked]="isCheckBoxChecked(customer.id)" (change)="checkCandidate($event, customer.id)"></td>
                             <td *ngFor="let field of fields;">
                                     {{ getData(customer, field) }}
                             </td>

@@ -29,6 +29,7 @@ export class CustomersComponent implements OnInit {
   selectedFields: ICandidateField[] =[];
   allFields: ICandidateField[] =[];
   filterSelectedFields: ICandidateField[] =[];
+  checkedCandidates = [];
  // searchSelected: ICandidateField[] =[];
 
   searchSelectedItem = {displayName: "Recruiter", editable: false, fieldName: "assignee", name: "assignee", options:[], type: "select"};

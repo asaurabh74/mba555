@@ -18,6 +18,8 @@ export class CustomersGridComponent implements OnInit {
   @Input() customers: ICustomer[] = [];
   @Input() fields: ICandidateField[] = [];
   @Input() allFields: ICandidateField[] = [];
+  @Input() checkedCandidates: any[] = [];
+  
   
 
   constructor(private sorterService: SorterService, public trackbyService: TrackByService) { }
@@ -32,14 +34,51 @@ export class CustomersGridComponent implements OnInit {
 
   // getCustomers(): void {
 	// 	this.dataService.getCustomers().subscribe(customers => this.customers = customers);
-	// }
+	// } 
 	
 	checkAllCheckBox(ev) {
-		this.customers.forEach(x => x.checked = ev.target.checked)
-	}
+		this.customers.forEach(x =>  {
+      var customerChecked = ev.target.checked;
+      if (customerChecked) {
+        // push the customer id in the array
+        this.checkedCandidates.push(x.id);
+      } else {
+        var index =this.checkedCandidates.indexOf(x.id);
+        if (index !== -1) {
+         delete this.checkedCandidates[x.id];
+        }
+      }
+    })
+  }
+  
+
+  isCheckBoxChecked (candidateId) {
+    return this.checkedCandidates.indexOf(candidateId) !== -1;
+  }
+
+  checkCandidate(ev, candidateId) {
+    var customerChecked = ev.target.checked;
+    if (customerChecked) {
+      // push the customer id in the array
+      this.checkedCandidates.push(candidateId);
+    } else {
+      var index =this.checkedCandidates.indexOf(candidateId);
+      if (index !== -1) {
+       delete this.checkedCandidates[index];
+      }
+    }
+  }
 
 	isAllCheckBoxChecked() {
-		return this.customers.every(p => p.checked);
+    var allChecked = true;
+    this.customers.forEach(x =>  {
+      var index =this.checkedCandidates.indexOf(x.id);
+      if (index === -1) {
+         allChecked = false;
+      }
+    })
+    return allChecked;
+	 	//return this.customers.every(p => p.checked);
   }
   
   getData(customer: ICustomer, field :ICandidateField){
