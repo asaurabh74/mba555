@@ -44,7 +44,7 @@ export class CustomersComponent implements OnInit {
 
 
   displayTypes = [
-    {id: 0, iconClass: "glyphicon glyphicon-th-large", type: "Card View"},
+    {id: 0, iconClass: "glyphicon glyphicon-th-large", type: "Detail View"},
     {id: 1, iconClass: "glyphicon glyphicon-align-justify", type: "List View"}
   ]
 
